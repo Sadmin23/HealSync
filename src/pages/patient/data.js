@@ -8,11 +8,11 @@ export const vital_data = [
         unit: 'bpm'
     },
     {
+        label: 'Breathing Rate',
+        unit: 'breaths/m'
+    },
+    {
         label: 'Blood Pressure',
         unit: 'mm/Hg'
     },
-    {
-        label: 'Breathing Rate',
-        unit: 'breaths/m'
-    }
 ]

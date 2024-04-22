@@ -1,7 +1,12 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
 
-export default function LineChart({ chartData, maxData }) {
+export default function LineChart({ chartData, vitalIndex, minmax }) {
+
+  const {min, max} = minmax;
+
+  console.log(min, max);
+
   return (
       <Line
         width={350}
@@ -12,7 +17,7 @@ export default function LineChart({ chartData, maxData }) {
               display: false,
             },
             legend: {
-              display: false
+              display: vitalIndex === 3 ? true : false,
             }
           },
           elements: {
@@ -30,8 +35,8 @@ export default function LineChart({ chartData, maxData }) {
               ticks: {
                 padding: 10
               },
-              min: 0,
-              max: 200
+              min: min,
+              max: max
             },
             x: {
               reverse: false,

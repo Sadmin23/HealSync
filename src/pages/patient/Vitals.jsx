@@ -17,27 +17,63 @@ const dataset = [
   },
   {
     label: 'Pulse',
-    data: [100, 72, 74, 76, 78, 80, 82],
+    data: [70, 72, 74, 76, 75, 80, 82], // Fluctuating values
     borderColor: '#FF6F61'
   },
   {
     label: 'Breathing Rate',
-    data: [100, 14, 16, 18, 20, 22, 24],
+    data: [12, 14, 16, 15, 20, 22, 24], // Fluctuating values
     borderColor: '#5EBA7D'
   },
-  [ {
-    label: 'Systolic Pressure',
-    data: [120, 125, 122, 118, 121, 119, 123],
-    borderColor: '#8B5CF6'
-  },
-  {
-    label: 'Diasystolic Pressure',
-    data: [80, 85, 82, 78, 81, 79, 83],
-    borderColor: '#FF6F61'
-  }]
+  [ 
+    {
+      label: 'Systolic Pressure',
+      data: [120, 125, 122, 118, 121, 119, 123],
+      borderColor: '#8B5CF6'
+    },
+    {
+      label: 'Diasystolic Pressure',
+      data: [80, 85, 82, 78, 81, 79, 83],
+      borderColor: '#FF6F61'
+    }
+  ]
 ];
 
+const data_range = [
+  {
+    min: 35,
+    max: 40
+  },
+  {
+    min: 65,
+    max: 85
+  },
+  {
+    min: 10,
+    max: 25
+  },
+  {
+    min: 75,
+    max: 130
+  }
+]
 
+function getLastValueOfDataset(index) {
+  if (index < 0 || index >= dataset.length) {
+    return 'Invalid index';
+  }
+
+  if (index < 3) {
+    const dataSeries = dataset[index].data;
+    return dataSeries[dataSeries.length - 1].toString();
+  }
+
+  if (index === 3) {
+    const systolicDataSeries = dataset[index][0].data;
+    const diasystolicDataSeries = dataset[index][1].data;
+    return `${diasystolicDataSeries[diasystolicDataSeries.length - 1]}/${systolicDataSeries[systolicDataSeries.length - 1]}`;
+  }
+}
 
 export default function Vitals() {
 
@@ -55,11 +91,11 @@ export default function Vitals() {
         <div className="w-[450px] grid grid-cols-2 gap-5 text-slate-400 font-semibold">
             {vital_data.map((vital, index) => (
               <button onClick={() => setSelected(index) } key={index} className="text-left">
-                <Vital_Box title={vital.label} value={35} unit={vital.unit} selected={selected===index} />
+                <Vital_Box title={vital.label} value={getLastValueOfDataset(index)} unit={vital.unit} selected={selected===index} />
               </button>
             ))}
           </div>
-        <LineChart chartData={chartData} maxData={4000} />
+        <LineChart chartData={chartData} vitalIndex={selected} minmax={data_range[selected]}/>
       </div>
     </div>
   );
