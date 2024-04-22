@@ -4,7 +4,7 @@ import { Line } from "react-chartjs-2";
 export default function LineChart({ chartData, maxData }) {
   return (
       <Line
-        width={320}
+        width={350}
         data={chartData}
         options={{
           plugins: {
@@ -30,7 +30,8 @@ export default function LineChart({ chartData, maxData }) {
               ticks: {
                 padding: 10
               },
-              max: maxData ? maxData : 5000
+              min: 0,
+              max: 200
             },
             x: {
               reverse: false,
