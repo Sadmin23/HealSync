@@ -41,8 +41,8 @@ const dataset = [
 
 const data_range = [
   {
-    min: 35,
-    max: 40
+    min: 36,
+    max: 38
   },
   {
     min: 65,
