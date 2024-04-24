@@ -32,7 +32,7 @@ export default function Card({Time, Name, Phone, type}) {
             <div className={`inline-block text-sm font-semibold rounded-md py-1 px-2 ${style}`}>{type}</div>
             <div className='flex pl-2 py-6 border-b'>
                 <p className='text-sm text-gray-400 font-semibold tracking-wider'>{Time}</p>
-                <p className='text-sm text-blue-800 font-semibold tracking-wide ml-16'>Starts in 15m</p>
+                <p className='text-sm text-blue-800 font-semibold tracking-wide ml-20'>Starts in 15m</p>
             </div>
             <div className='flex mt-5 items-center'>
                 <img src={icon} alt='doctor' className='w-16 h-16 rounded-full'/>
