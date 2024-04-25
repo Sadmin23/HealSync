@@ -4,7 +4,7 @@ import CommonLayout from './CommonLayout';
 
 export default function Reports() {
   return (
-    <CommonLayout title="Reports">
+    <CommonLayout title="IMPORTANT DOCUMENTS">
       Reports
     </CommonLayout>
   );

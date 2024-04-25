@@ -38,14 +38,14 @@ export default function Sidebar() {
   }
 
   return (
-    <div className='w-64 border-r border-b rounded-br-md shadow-md bg-white border-gray-300 text-center h-full'>
+    <div className='w-64 text-gray-700 border-r border-b rounded-br-md shadow-md bg-white border-gray-300 text-center h-full'>
         <img 
           src='avatar.png' 
           alt='logo' 
           className='w-28 h-20 mx-auto mt-5'
         />
         <p className='font-semibold mt-2 mb-1'>{user.username}</p>
-        <p className=''>{user.user}</p>
+        <p>{user.user}</p>
         <main className='my-10'>
             <ul className='px-4'>
               {navigationLinks.map((link, index) => (

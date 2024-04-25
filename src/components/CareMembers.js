@@ -18,5 +18,10 @@ export const CareMembers = [
         name: 'John Wills',
         designation: 'Nurse',
         src: nurse
-    }
+    },
+    {
+        name: 'Sarah Smith',
+        designation: 'Nurse',
+        src: nurse2
+    },
 ]
