@@ -6,7 +6,7 @@ import { Medicines } from './Medicines';
 export default function Prescriptions() {
   return (
     <CommonLayout title="PRESCRIBED MEDICATIONS">
-        <div className='mt-6'></div>
+        <div className='mt-6 '></div>
         {Medicines.map((medicine, index) => ( 
             <div key={index} className='flex text-gray-600 mb-6'>
                 <img src={medicine.src} alt={medicine.name} className='w-6 h-6'/>
