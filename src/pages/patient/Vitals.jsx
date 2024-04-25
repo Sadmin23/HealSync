@@ -4,6 +4,7 @@ import LineChart from "../../components/LineChart";
 import { vital_data } from "./data";
 import Vital_Box from "../../components/Vital_Box";
 import { useState } from "react";
+import Welcome from "../../components/Welcome";
 
 Chart.register(CategoryScale);
 
@@ -85,9 +86,10 @@ export default function Vitals() {
   };
 
   return (
-    <div className="h-screen">
-      <h1 className="text-lg my-4 font-bold text-slate-400 mx-12">VITALS (Last update on 14/04/2024 at 14:30)</h1>
-      <div className="py-10 rounded-lg shadow-md flex h-1/2 px-5 bg-white items-center mx-10 space-x-4">
+    <div className=" h-screen mx-10 bg-slate-200">
+      <Welcome/>
+      <h1 className="text-lg my-4 font-bold text-slate-400 mx-2">VITALS (Last update on 14/04/2024 at 14:30)</h1>
+      <div className="w-[1200px] py-10 rounded-lg shadow-md flex h-1/2 px-5 bg-white items-center space-x-4">
         <div className="w-[450px] grid grid-cols-2 gap-5 text-slate-400 font-semibold">
             {vital_data.map((vital, index) => (
               <button onClick={() => setSelected(index) } key={index} className="text-left">
