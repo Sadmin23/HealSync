@@ -1,103 +1,95 @@
+import React, { useState, useEffect } from 'react';
 import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js";
 import LineChart from "../../components/LineChart";
-import { vital_data } from "./data";
 import Vital_Box from "../../components/Vital_Box";
-import { useState } from "react";
 import Welcome from "../../components/Welcome";
+import { vital_data } from "./data";
 
 Chart.register(CategoryScale);
 
-const labels = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+export default function Vitals() {
+  const [vitalsData, setVitalsData] = useState(null);
+  const [selected, setSelected] = useState(0);
+  const [value, setValue] = useState(["0", "0", "0", "0/0"]);
 
-const dataset = [
-  {
-    label: 'Body Temp',
-    data: [36.5, 36.7, 36.8, 36.9, 37.0, 37.1, 37.2],
-    borderColor: '#8B5CF6'
-  },
-  {
-    label: 'Pulse',
-    data: [70, 72, 74, 76, 75, 80, 82], // Fluctuating values
-    borderColor: '#FF6F61'
-  },
-  {
-    label: 'Breathing Rate',
-    data: [12, 14, 16, 15, 20, 22, 24], // Fluctuating values
-    borderColor: '#5EBA7D'
-  },
-  [ 
+  useEffect(() => {
+    fetch('http://127.0.0.1:8000/vitals')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to fetch vitals data');
+        }
+        return response.json();
+      })
+      .then(data => 
+        setVitalsData(data)
+      )
+      .catch(error => console.error('Error fetching vitals data:', error));
+  }, []);
+
+
+  useEffect(() => {
+    if (vitalsData && vitalsData.datasets) {
+      const updatedValues = vitalsData.datasets.map((_, index) => getLastValueOfDataset(index));
+      setValue(updatedValues);
+    }
+  }, [vitalsData]);
+  
+  const getLastValueOfDataset = (index) => {
+    if (!vitalsData || index < 0 || index >= vitalsData.datasets.length) {
+      return 'Loading...';
+    }
+    
+    const dataEntry = vitalsData.datasets[index];
+    if (Array.isArray(dataEntry)) {
+      // Handle blood pressure values
+      const systolicData = dataEntry[0].data;
+      const diastolicData = dataEntry[1].data;
+      return `${diastolicData[diastolicData.length - 1]}/${systolicData[systolicData.length - 1]}`;
+    } else {
+      // Handle other vitals
+      const data = dataEntry.data;
+      return data[data.length - 1].toString();
+    }
+  };
+  
+  const data_range = [
     {
-      label: 'Systolic Pressure',
-      data: [120, 125, 122, 118, 121, 119, 123],
-      borderColor: '#8B5CF6'
+      min: 36,
+      max: 38
     },
     {
-      label: 'Diasystolic Pressure',
-      data: [80, 85, 82, 78, 81, 79, 83],
-      borderColor: '#FF6F61'
+      min: 65,
+      max: 85
+    },
+    {
+      min: 10,
+      max: 25
+    },
+    {
+      min: 75,
+      max: 130
     }
   ]
-];
-
-const data_range = [
-  {
-    min: 36,
-    max: 38
-  },
-  {
-    min: 65,
-    max: 85
-  },
-  {
-    min: 10,
-    max: 25
-  },
-  {
-    min: 75,
-    max: 130
-  }
-]
-
-function getLastValueOfDataset(index) {
-  if (index < 0 || index >= dataset.length) {
-    return 'Invalid index';
-  }
-
-  if (index < 3) {
-    const dataSeries = dataset[index].data;
-    return dataSeries[dataSeries.length - 1].toString();
-  }
-
-  if (index === 3) {
-    const systolicDataSeries = dataset[index][0].data;
-    const diasystolicDataSeries = dataset[index][1].data;
-    return `${diasystolicDataSeries[diasystolicDataSeries.length - 1]}/${systolicDataSeries[systolicDataSeries.length - 1]}`;
-  }
-}
-
-export default function Vitals() {
-
-  const [selected, setSelected] = useState(0);
 
   const chartData = {
-    labels,
-    datasets: Array.isArray(dataset[selected]) ? dataset[selected] : [dataset[selected]]
+    labels: vitalsData ? vitalsData.labels : [],
+    datasets: vitalsData ? Array.isArray(vitalsData.datasets[selected]) ? vitalsData.datasets[selected] : [vitalsData.datasets[selected]] : []
   };
 
   return (
-    <div className=" h-screen mx-10 bg-slate-200">
-      <Welcome/>
-      <h1 className="text-lg my-4 font-bold text-slate-400 mx-2">VITALS (Last update on 14/04/2024 at 14:30)</h1>
+    <div className="h-screen mx-10 bg-slate-200">
+      <Welcome />
+      <h1 className="text-lg my-4 font-bold text-slate-400 mx-2">VITALS (Last update on )</h1>
       <div className="w-[1200px] py-10 rounded-lg shadow-md flex h-1/2 px-5 bg-white items-center space-x-4">
         <div className="w-[450px] grid grid-cols-2 gap-5 text-slate-400 font-semibold">
-            {vital_data.map((vital, index) => (
-              <button onClick={() => setSelected(index) } key={index} className="text-left">
-                <Vital_Box title={vital.label} value={getLastValueOfDataset(index)} unit={vital.unit} selected={selected===index} />
-              </button>
-            ))}
-          </div>
-        <LineChart chartData={chartData} vitalIndex={selected} minmax={data_range[selected]}/>
+          {vital_data.map((vital, index) => (
+            <button onClick={() => setSelected(index)} key={index} className="text-left">
+              <Vital_Box title={vital.label} value={value[index]} unit={vital.unit} selected={selected === index} />
+            </button>
+          ))}
+        </div>
+        <LineChart chartData={chartData} vitalIndex={selected} minmax={data_range[selected]} />
       </div>
     </div>
   );

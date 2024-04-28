@@ -4,9 +4,7 @@ import { Line } from "react-chartjs-2";
 export default function LineChart({ chartData, vitalIndex, minmax }) {
 
   const {min, max} = minmax;
-
-  console.log(min, max);
-
+  
   return (
       <Line
         width={350}
