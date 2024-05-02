@@ -5,7 +5,7 @@ import pill from '../assets/medicine.png';
 import syringe from '../assets/syringe.png';
 import syrup from '../assets/syrup.png';
 
-export default function Prescriptions() {
+export default function Prescriptions({update}) {
 
   const [medicines, setMedicines] = useState([]);
 
@@ -25,14 +25,16 @@ export default function Prescriptions() {
 
   return (
     <CommonLayout title="PRESCRIBED MEDICATIONS">
-        <div className='mt-6 '></div>
+        <div className="flex flex-col h-5/6 scroll-auto">
         {medicines.map((medicine, index) => ( 
-            <div key={index} className='flex text-gray-600 mb-6'>
+            <div key={index} className='flex text-gray-600 mt-6'>
                 <img src={medicine.type === "tablet" ? pill : medicine.type === "injection" ? syringe : syrup} alt={medicine.name} className='w-6 h-6'/>
                 <h1 className='ml-4'>{medicine.name}</h1>
                 <h1 className='ml-auto'>{medicine.dose}</h1>
             </div>
         ))  }
+        </div>
+        {update && <button className='bg-blue-500 text-white px-8 py-2 rounded-lg ml-20'>Add Medicine</button>}
     </CommonLayout>
   );
 }
