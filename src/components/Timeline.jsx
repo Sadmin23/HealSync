@@ -20,7 +20,7 @@ export default function Timeline({ defaultColor }) {
               <div
                 className={`bg-slate-700 w-[3px] h-full translate-x-8 translate-y-10 opacity-30`}
               ></div>
-              <div className="w-6 h-6 ml-[18px] rounded-full mt-4 bg-slate-400"></div>
+              <img src={element.src} alt="logo" className="w-12 h-12 ml-2 rounded-full"/>
               <div
                 className={`h-1 w-8 translate-y-5 opacity-30`}
               ></div>
