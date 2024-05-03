@@ -16,3 +16,22 @@ export const vital_data = [
         unit: 'mm/Hg'
     },
 ]
+
+export const data_range = [
+    {
+      min: 36,
+      max: 38
+    },
+    {
+      min: 65,
+      max: 85
+    },
+    {
+      min: 10,
+      max: 25
+    },
+    {
+      min: 75,
+      max: 130
+    }
+  ]

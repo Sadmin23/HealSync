@@ -4,7 +4,7 @@ import { CategoryScale } from "chart.js";
 import LineChart from "../../components/LineChart";
 import Vital_Box from "../../components/Vital_Box";
 import Welcome from "../../components/Welcome";
-import { vital_data } from "./data";
+import { data_range, vital_data } from "./data";
 
 Chart.register(CategoryScale);
 
@@ -35,6 +35,58 @@ export default function Vitals({update}) {
       setValue(updatedValues);
     }
   }, [vitalsData]);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+  
+    const temp = formData.get('temp');
+    const pulse = formData.get('pulse');
+    const breaths = formData.get('breaths');
+    const sysPressure = formData.get('sys_pressure');
+    const diasPressure = formData.get('dias_pressure');
+  
+    const today = new Date();
+    const day = String(today.getDate()).padStart(2, '0');
+    const month = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+    const label = `${day}/${month}`;
+  
+    const data = {
+      label: label,
+      data: [parseFloat(temp), parseInt(pulse), parseInt(breaths), parseInt(sysPressure), parseInt(diasPressure)]
+    };
+  
+    console.log(data);
+  
+    try {
+      const response = await fetch('http://localhost:8000/vitals', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to update vitals data');
+      }
+  
+      console.log('Vitals data updated successfully');
+  
+      const updatedDataResponse = await fetch('http://localhost:8000/vitals');
+      if (!updatedDataResponse.ok) {
+        throw new Error('Failed to fetch updated vitals data');
+      }
+  
+      const updatedData = await updatedDataResponse.json();
+      setVitalsData(updatedData);
+    } catch (error) {
+      console.error('Error updating vitals data:', error);
+    }
+  
+    setShowForm(false);
+  }
+  
   
   const getLastValueOfDataset = (index) => {
     if (!vitalsData || index < 0 || index >= vitalsData.datasets.length) {
@@ -58,25 +110,6 @@ export default function Vitals({update}) {
     }
     return vitalsData.labels[vitalsData.labels.length - 1];
   }
-  
-  const data_range = [
-    {
-      min: 36,
-      max: 38
-    },
-    {
-      min: 65,
-      max: 85
-    },
-    {
-      min: 10,
-      max: 25
-    },
-    {
-      min: 75,
-      max: 130
-    }
-  ]
 
   const chartData = {
     labels: vitalsData ? vitalsData.labels : [],
@@ -97,34 +130,40 @@ export default function Vitals({update}) {
                   <button className="bg-red-500 translate-x-6 -translate-y-4 text-white font-semibold rounded-full px-2  hover:bg-red-700 ml-auto" onClick={() => setShowForm(false)}>X</button>                
                 </div>
                 <div className='bg-white'>
-                  <form>
+                  <form onSubmit={handleSubmit}>
+                  <div className="mb-8">
+                    <label htmlFor="temp" className="block text-gray-700 font-bold">Body Temperature</label>
+                    <input
+                      type="number"
+                      id="temp"
+                      placeholder="in ℃"
+                      step="0.1" // Allow float input
+                      required={true}
+                      name="temp"
+                      className="w-full border-2 border-gray-300 rounded-md py-2 px-4 mt-1 focus:outline-none focus:border-primary-500"
+                    />
+                  </div>
                       <div className="mb-8">
-                        <label htmlFor="name" className="block text-gray-700 font-bold">Body Temperature</label>
-                        <input type="number" id="name" placeholder='in ℃' required={true} name="name" className="w-full border-2 border-gray-300 rounded-md py-2 px-4 mt-1 focus:outline-none focus:border-primary-500" />
-                      </div>
-                      <div className="mb-8">
-                        <label htmlFor="dose" className="block text-gray-700 font-bold">Pulse Rate</label>
-                        <input type="number" id="dose" placeholder='in bpm' required={true} name="dose" className="w-full border-2 border-gray-300 rounded-md py-2 px-4 mt-1 focus:outline-none focus:border-primary-500" />
+                        <label htmlFor="pulse" className="block text-gray-700 font-bold">Pulse Rate</label>
+                        <input type="number" id="pulse" placeholder='in bpm' required={true} name="pulse" className="w-full border-2 border-gray-300 rounded-md py-2 px-4 mt-1 focus:outline-none focus:border-primary-500" />
                       </div>
                     <div className="mb-8">
-                      <label htmlFor="dose" className="block text-gray-700 font-bold">Breathing Rate</label>
-                      <input type="number" id="dose" placeholder='in breaths/min' required={true} name="dose" className="w-full border-2 border-gray-300 rounded-md py-2 px-4 mt-1 focus:outline-none focus:border-primary-500" />
+                      <label htmlFor="breaths" className="block text-gray-700 font-bold">Breathing Rate</label>
+                      <input type="number" id="breaths" placeholder='in breaths/min' required={true} name="breaths" className="w-full border-2 border-gray-300 rounded-md py-2 px-4 mt-1 focus:outline-none focus:border-primary-500" />
                     </div>
-
                     <div className='flex space-x-4'>
                       <div className="mb-8">
-                        <label htmlFor="dose" className="block text-gray-700 font-bold">Systolic Pressure</label>
-                        <input type="number" id="dose" placeholder='in mm/Hg' required={true} name="dose" className="w-full border-2 border-gray-300 rounded-md py-2 px-4 mt-1 focus:outline-none focus:border-primary-500" />
+                        <label htmlFor="sys_pressure" className="block text-gray-700 font-bold">Systolic Pressure</label>
+                        <input type="number" id="sys_pressure" placeholder='in mm/Hg' required={true} name="sys_pressure" className="w-full border-2 border-gray-300 rounded-md py-2 px-4 mt-1 focus:outline-none focus:border-primary-500" />
                       </div>
                       <div className="">
-                        <label htmlFor="dose" className="block text-gray-700 font-bold">Diastolic Pressure</label>
-                        <input type="number" id="dose" placeholder='in mm/Hg' required={true} name="dose" className="w-full border-2 border-gray-300 rounded-md py-2 px-4 mt-1 focus:outline-none focus:border-primary-500" />
+                        <label htmlFor="dias_pressure" className="block text-gray-700 font-bold">Diastolic Pressure</label>
+                        <input type="number" id="dias_pressure" placeholder='in mm/Hg' required={true} name="dias_pressure" className="w-full border-2 border-gray-300 rounded-md py-2 px-4 mt-1 focus:outline-none focus:border-primary-500" />
                       </div>
-
                     </div>
                     <div className="flex justify-center">
                         <button type="submit" className="bg-slate-800 text-white text-lg font-semibold py-4 px-6 rounded-md hover:bg-primary-600">Add Vitals</button>
-                      </div>
+                    </div>
                   </form>
                 </div>
               </div>
