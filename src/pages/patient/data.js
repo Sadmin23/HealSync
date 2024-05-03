@@ -4,7 +4,7 @@ export const vital_data = [
         unit: '℃'
     },
     {
-        label: 'Pulse',
+        label: 'Pulse Rate',
         unit: 'bpm'
     },
     {
