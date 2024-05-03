@@ -48,15 +48,13 @@ export default function Vitals({update}) {
   
     const today = new Date();
     const day = String(today.getDate()).padStart(2, '0');
-    const month = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+    const month = String(today.getMonth() + 1).padStart(2, '0');
     const label = `${day}/${month}`;
   
     const data = {
       label: label,
       data: [parseFloat(temp), parseInt(pulse), parseInt(breaths), parseInt(sysPressure), parseInt(diasPressure)]
     };
-  
-    console.log(data);
   
     try {
       const response = await fetch('http://localhost:8000/vitals', {
@@ -71,8 +69,6 @@ export default function Vitals({update}) {
         throw new Error('Failed to update vitals data');
       }
   
-      console.log('Vitals data updated successfully');
-  
       const updatedDataResponse = await fetch('http://localhost:8000/vitals');
       if (!updatedDataResponse.ok) {
         throw new Error('Failed to fetch updated vitals data');
@@ -80,6 +76,24 @@ export default function Vitals({update}) {
   
       const updatedData = await updatedDataResponse.json();
       setVitalsData(updatedData);
+      
+      const currentDate = new Date();
+      const formattedDate = currentDate.toLocaleDateString('en-GB'); // Format date as 'DD/MM/YYYY'
+      const formattedTime = currentDate.toLocaleTimeString('en-US', { hour12: false }); // Format time as 'HH:MM'
+  
+      await fetch('http://127.0.0.1:8000/timeline', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          title: 'Vitals Checkup',
+          description: 'Vitals updated by sister Jane Doe.',
+          date: formattedDate,
+          time: formattedTime
+        }),
+      });
+
     } catch (error) {
       console.error('Error updating vitals data:', error);
     }

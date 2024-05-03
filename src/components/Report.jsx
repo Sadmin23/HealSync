@@ -14,8 +14,26 @@ export default function Reports({ update }) {
       .catch(error => console.error('Error fetching PDF list:', error));
   }, []);
 
-  const handleUpload = (newPdf) => {
+  const handleUpload = async (newPdf) => {
     setPdfList([...pdfList, newPdf]);
+
+    const currentDate = new Date();
+    const formattedDate = currentDate.toLocaleDateString('en-GB'); // Format date as 'DD/MM/YYYY'
+    const formattedTime = currentDate.toLocaleTimeString('en-US', { hour12: false }); // Format time as 'HH:MM'
+
+    await fetch('http://127.0.0.1:8000/timeline', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        title: 'Diagnostic Report',
+        description: 'Diagnostic Report has been updated by Dr. John Doe.',
+        date: formattedDate,
+        time: formattedTime
+      }),
+    });
+    
     setShowUploadForm(false);
   };
 
