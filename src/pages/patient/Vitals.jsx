@@ -135,7 +135,7 @@ export default function Vitals({update}) {
       {!update && <Welcome />}
       <div className='flex justify-between items-center'>
         <h1 className="text-lg my-4 font-bold text-slate-400 mx-2">VITALS (Last update on {getLastDate()})</h1>
-        {update && <button onClick={()=>setShowForm(true)} className='bg-blue-500 text-white font-semibold px-6 py-2 rounded-lg ml-20'>Update Vitals</button>}
+        {update && <button onClick={()=>setShowForm(true)} className='bg-blue-500 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-lg ml-20'>Update Vitals</button>}
         {showForm && (
             <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-50">
               <div className="bg-white px-12 pt-8 pb-8 rounded-lg">

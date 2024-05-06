@@ -55,7 +55,7 @@ export default function Reports({ update }) {
       </div>
       {update && (
         <>
-          <button className='bg-blue-500 text-white px-8 py-2 rounded-lg mb-3 ml-24' onClick={() => setShowUploadForm(true)}>
+          <button className='bg-blue-500 hover:bg-blue-700 text-white font-semibold px-8 py-2 rounded-lg mb-3 ml-24' onClick={() => setShowUploadForm(true)}>
             Add New Report
           </button>
           {showUploadForm && (

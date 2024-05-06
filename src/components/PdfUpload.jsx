@@ -33,8 +33,8 @@ const PdfUpload = ({ onUpload }) => {
   };
 
   return (
-      <form className='flex flex-col' onSubmit={handleSubmit}>
-        <input className='border-2 border-dashed rounded-lg border-gray-500 pl-20 py-14' type="file" onChange={handleFileChange} accept=".pdf" />
+      <form className='flex flex-col w-96' onSubmit={handleSubmit}>
+        <input className='border-2 border-dashed rounded-lg border-gray-500 pl-24 py-14' type="file" onChange={handleFileChange} accept=".pdf" />
         <button className='rounded-lg mt-6 bg-gray-300 font-semibold text-gray-700 hover:bg-gray-500 hover:text-white px-4 py-2 ' type="submit">Upload PDF</button>  
       </form>
   );

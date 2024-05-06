@@ -83,7 +83,7 @@ export default function Prescriptions({update}) {
             </div>
         ))  }
         </div>
-        {update && <button onClick={()=>setShowForm(true)} className='bg-blue-500 text-white px-8 py-2 rounded-lg ml-20'>Add Medicine</button>}
+        {update && <button onClick={()=>setShowForm(true)} className='bg-blue-500 hover:bg-blue-700 font-semibold text-white px-8 py-2 rounded-lg ml-20'>Add Medicine</button>}
         {showForm && (
             <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-50">
               <div className="bg-white px-12 pt-8 pb-8 rounded-lg">
