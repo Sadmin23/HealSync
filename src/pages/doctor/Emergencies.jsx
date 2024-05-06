@@ -21,27 +21,11 @@ export default function Emergencies() {
 
   return (
     <div className='h-screen p-8'>
-      <div className='flex items-center justify-between mb-8'>
-        <h1 className='text-2xl font-bold text-teal-800'>Healsync</h1>
-        <p className='text-2xl font-bold text-teal-800'>EMERGENCIES</p>
-      </div>
-      <div className="w-full">
-        <table className='block w-full border-collapse border border-gray-300'>
-          <thead>
-            <tr className='bg-teal-700 text-white'>
-              <th className='border border-gray-300 p-2'>Patient ID</th>
-              <th className='border border-gray-300 p-2'>Date/Time</th>
-              <th className='border border-gray-300 p-2'>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td className='border border-gray-300 p-2'>{defaultPatientID}</td>
-              <td className='border border-gray-300 p-2'>{new Date().toLocaleString()}</td>
-              <td className='border border-gray-300 p-2'>{defaultAction}</td>
-            </tr>
-          </tbody>
-        </table>
+      <div className="flex mt-8 text-white bg-slate-700 h-16 text-lg font-semibold rounded-t-lg">
+        <div className="pl-6 pt-4 border-l rounded-tl-lg border-r border-y border-slate-950 w-60">Patient ID</div>
+        <div className="pl-6 pt-4 border-r border-y border-slate-950 w-80">Patient Name</div>
+        <div className="pl-6 pt-4 border-r border-y border-slate-950 w-80">Time</div>
+        <div className="pl-6 pt-4 border-r rounded-tr-lg border-y border-slate-950 w-80">Action</div>
       </div>
     </div>
   );
