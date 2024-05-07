@@ -8,11 +8,13 @@ import { data_range, vital_data } from "./data";
 
 Chart.register(CategoryScale);
 
-export default function Vitals({update}) {
+export default function Vitals({update, patientId}) {
   const [vitalsData, setVitalsData] = useState(null);
   const [selected, setSelected] = useState(0);
   const [value, setValue] = useState(["0", "0", "0", "0/0"]);
   const [showForm, setShowForm] = useState(false);
+
+  console.log(patientId);
 
   useEffect(() => {
     fetch('http://127.0.0.1:8000/vitals')

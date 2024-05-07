@@ -1,37 +1,42 @@
 import React from 'react'
 import nurse from '../assets/nurse.jpg'
+import PatientList from '../pages/doctor/PatientList';
 
-export default function PatientCard({role}) {
+export default function PatientCard({patientId, role, setPatientId, setVitals}) {
     
-      const handleVitals = () => {
-        // Placeholder for vitals handling function
-        alert("Latest vitals update here.");
-      };
-    
-      const handleTreatmentPlan = () => {
-        // Placeholder for treatment plan handling function
-        alert("Treatment plan details here.");
-      };
+  const handleVitals = () => {
+    setPatientId(patientId);
+    setVitals(true);
+  };
+
+  const handleTreatmentPlan = () => {
+    // Placeholder for treatment plan handling function
+    alert("Treatment plan details here.");
+  };
+
+  //get Patient using patientId
+  const patient = PatientList.find((patient) => patient.id === patientId);
+
 
   return (
     <div className='bg-white w-96 border border-gray-300 shadow-md rounded-lg p-6'>
         <div className='flex items-center border-b-2 pb-4'>
           <img src={nurse} alt='nurse' className='h-16 w-16 rounded-full' />
           <div className='ml-8 font-semibold space-y-2'>
-            <h1 className='text-green-600'>Lindsay Johnson</h1>
-            <h1 className='text-gray-600'>Patient ID: 1204</h1>
+            <h1 className='text-green-600'>{patient.name}</h1>
+            <h1 className='text-gray-600'>Patient ID: {patient.id}</h1>
           </div>
         </div>
         <div className='mt-4 pb-4 border-b-2'>
             <div className='flex justify-between text-gray-600 font-semibold'>
-              <h1>Age: <span className='text-green-500'>24</span></h1>
-              <h1>Weight: <span className='text-green-500'>70 kg</span></h1>
-              <h1>Blood Group: <span className='text-red-500'>O+</span></h1>
+              <h1>Age: <span className='text-green-500'>{patient.age}</span></h1>
+              <h1>Weight: <span className='text-green-500'>{patient.weight}</span></h1>
+              <h1>Blood Group: <span className='text-red-500'>{patient.blood_grp}</span></h1>
             </div>
-            <h1 className='text-gray-600 font-semibold mt-4'>Contact: <span className='text-gray-400'>📞 +8801234567890</span></h1>
-            <h1 className='text-gray-600 font-semibold mt-4'>Attendant Name: <span className='text-gray-400 ml-2'>Mr. John Doe</span></h1>
-            <h1 className='text-gray-600 font-semibold mt-4'>Attendant Contact: <span className='text-gray-400'>📞 +8801234567890</span></h1>
-            <h1 className='text-gray-600 font-semibold mt-4'>Attendant Email: <span className='text-gray-400 ml-2'>sample@gmail.com</span></h1>
+            <h1 className='text-gray-600 font-semibold mt-4'>Contact: <span className='text-gray-400'>📞 {patient.phone}</span></h1>
+            <h1 className='text-gray-600 font-semibold mt-4'>Attendant Name: <span className='text-gray-400 ml-2'>{patient.attendant_name}</span></h1>
+            <h1 className='text-gray-600 font-semibold mt-4'>Attendant Contact: <span className='text-gray-400'>📞 {patient.attendant_phone}</span></h1>
+            <h1 className='text-gray-600 font-semibold mt-4'>Attendant Email: <span className='text-gray-400 ml-2'>{patient.attendant_email}</span></h1>
         </div>
         <div className='font-semibold'>
             <div className='flex space-x-4'>
