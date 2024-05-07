@@ -1,5 +1,5 @@
 export const patientLinks = [
-    { to: '/patient', label: 'Vitals' },
+    { to: '/patient', label: 'Dashboard' },
     { to: '/patient/treatment-plan', label: 'Treatment Plan' },
     { to: '/patient/medical-record', label: 'Medical Records' },
     { to: '/patient/contact', label: 'Contact' }

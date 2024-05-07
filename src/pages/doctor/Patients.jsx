@@ -11,7 +11,7 @@ export default function Patients() {
   return (
     <div className='h-screen'>
       {vitals ? (
-        <Vitals update={false} patientId={patientId} />
+        <Vitals role="doctor" patientId={patientId} />
       ) : (
         <div className='p-8'>
           <h1 className="text-lg font-bold text-green-900 mx-2">PATIENTS</h1>
