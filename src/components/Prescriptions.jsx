@@ -5,7 +5,7 @@ import pill from '../assets/medicine.png';
 import syringe from '../assets/syringe.png';
 import syrup from '../assets/syrup.png';
 
-export default function Prescriptions({update}) {
+export default function Prescriptions({update, patientId}) {
 
   const [medicines, setMedicines] = useState([]);
   const [showForm, setShowForm] = useState(false);

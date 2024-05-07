@@ -3,7 +3,7 @@ import CommonLayout from './CommonLayout';
 import PdfUpload from './PdfUpload';
 import pdf from '../assets/pdf.svg';
 
-export default function Reports({ update }) {
+export default function Reports({ update, patientId }) {
   const [pdfList, setPdfList] = useState([]);
   const [showUploadForm, setShowUploadForm] = useState(false);
 

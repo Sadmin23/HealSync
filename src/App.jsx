@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import Layout from './shared/Layout'
-import TreatmentPlan from './pages/patient/TreatmentPlan'
+
 import MedicalRecord from './pages/patient/MedicalRecord'
 import Contact from './pages/patient/Contact'
 import SignIn from './SignIn'
@@ -20,6 +20,7 @@ import AdminDashboard from './pages/admin/Dashboard'
 import { useSelector } from 'react-redux'
 import PrivateRoute from './utils/ProtectedRoute'
 import PatientDashboard from './pages/patient/Dashboard'
+import TreatmentOverview from './pages/patient/TreatmentOverview'
 
 export default function App() {
 
@@ -48,7 +49,7 @@ export default function App() {
         </Route>
         <Route path="/patient" element={<PrivateRoute userType={userType} allowedUserTypes={['Patient']} />}>
             <Route index element={<PatientDashboard />} />
-            <Route path='treatment-plan' element={<TreatmentPlan />} />
+            <Route path='treatment-plan' element={<TreatmentOverview />} />
             <Route path='medical-record' element={<MedicalRecord />} />
             <Route path='contact' element={<Contact />} />
         </Route>

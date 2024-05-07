@@ -2,7 +2,7 @@ import React from 'react'
 import nurse from '../assets/nurse.jpg'
 import PatientList from '../pages/doctor/PatientList';
 
-export default function PatientCard({patientId, role, setPatientId, setVitals}) {
+export default function PatientCard({patientId, role, setPatientId, setVitals, setTreatment}) {
     
   const handleVitals = () => {
     setPatientId(patientId);
@@ -10,13 +10,11 @@ export default function PatientCard({patientId, role, setPatientId, setVitals}) 
   };
 
   const handleTreatmentPlan = () => {
-    // Placeholder for treatment plan handling function
-    alert("Treatment plan details here.");
+    setPatientId(patientId);
+    setTreatment(true);
   };
 
-  //get Patient using patientId
   const patient = PatientList.find((patient) => patient.id === patientId);
-
 
   return (
     <div className='bg-white w-96 border border-gray-300 shadow-md rounded-lg p-6'>
