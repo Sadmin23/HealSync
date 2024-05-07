@@ -14,7 +14,7 @@ export default function PatientCard({role}) {
       };
 
   return (
-    <div className='bg-white w-96  rounded-lg p-6'>
+    <div className='bg-white w-96 border border-gray-300 shadow-md rounded-lg p-6'>
         <div className='flex items-center border-b-2 pb-4'>
           <img src={nurse} alt='nurse' className='h-16 w-16 rounded-full' />
           <div className='ml-8 font-semibold space-y-2'>
