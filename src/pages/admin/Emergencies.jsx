@@ -4,7 +4,7 @@ import AllEmergency from './AllEmergencies'
 export default function Emergencies() {
   return (
     <div className='h-screen p-8'>
-      <h1 className="text-lg font-bold text-green-900 mx-2">EMERGENCIES</h1>
+      <h1 className="text-lg font-bold text-green-900 mx-2">EMERGENCY LIST</h1>
       <header className="flex mt-6 text-white bg-green-900 font-semibold border border-green-950 rounded-t-md">
         <div className="pl-6 py-2 w-44">Patient ID</div>
         <div className="pl-6 py-2 w-40">Patient Name</div>

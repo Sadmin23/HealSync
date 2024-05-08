@@ -4,7 +4,7 @@ import DoctorList from './DoctorList'
 export default function Doctors() {
   return (
     <div className='h-screen ml-8 mt-8'>
-      <h1 className="text-lg font-bold text-green-900 mx-2">EMERGENCIES</h1>
+      <h1 className="text-lg font-bold text-green-900 mx-2">DOCTOR LIST</h1>
       <header className="flex mt-6 text-white bg-green-900 font-semibold border border-green-950 rounded-t-md">
         <div className="pl-6 py-2 w-52">Doctor ID</div>
         <div className="pl-6 py-2 w-48">Doctor Name</div>
