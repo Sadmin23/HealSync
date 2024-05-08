@@ -13,10 +13,10 @@ export default function Patients() {
   return (
     <div className='h-screen'>
       {vitals ? (
-        <Vitals role="doctor" patientId={patientId} />
+        <Vitals role="doctor" patientId={patientId} setVitals={setVitals}/>
       ) 
       : 
-      treatment ? (<TreatmentPlan role="doctor" patientId={patientId} />) :
+      treatment ? (<TreatmentPlan role="doctor" patientId={patientId} setTreatment={setTreatment}/>) :
       (
         <div className='p-8'>
           <h1 className="text-lg font-bold text-green-900 mx-2">PATIENTS</h1>

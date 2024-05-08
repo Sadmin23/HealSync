@@ -8,16 +8,19 @@ export default function Treatment() {
   const treatmentData = TreatmentPlan.slice(0, 3);
 
   return (
-    <div className='w-[1200px] flex px-3 justify-around items-center ml-10 rounded-lg h-72 bg-white'>
-      {treatmentData.map((data, index) => (
-        <Card
+    <div>
+      <h1 className="text-lg my-4 font-bold text-slate-400 ml-12">UPCOMING TREATMENT</h1>
+      <div className='w-[1200px] flex px-3 justify-around items-center ml-10 rounded-lg h-72 bg-white'>
+        {treatmentData.map((data, index) => (
+          <Card
           key={index}
           Time={data.time}
           Name={data.name}
           Phone={data.phone}
           type={data.type}
-        />
-      ))}
+          />
+        ))}
+      </div>
     </div>
   );
 }

@@ -8,7 +8,7 @@ import { data_range, vital_data } from "./data";
 
 Chart.register(CategoryScale);
 
-export default function Vitals({role, patientId}) {
+export default function Vitals({role, patientId, setVitals}) {
   const [vitalsData, setVitalsData] = useState(null);
   const [selected, setSelected] = useState(0);
   const [value, setValue] = useState(["0", "0", "0", "0/0"]);
@@ -132,9 +132,14 @@ export default function Vitals({role, patientId}) {
     datasets: vitalsData ? Array.isArray(vitalsData.datasets[selected]) ? vitalsData.datasets[selected] : [vitalsData.datasets[selected]] : []
   };
 
+  const handleBack = () => {
+    setVitals(false);
+  };
+
   return (
     <div className="h-screen mx-10 bg-slate-200">
       {(role === 'patient') && <Welcome />}
+      {(role !== 'patient') && <button onClick={handleBack} className='mt-4 ml-2 bg-blue-500 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg'>Back</button>}
       <div className='flex justify-between items-center'>
         <h1 className="text-lg my-4 font-bold text-slate-400 mx-2">VITALS (Last update on {getLastDate()})</h1>
         {(role === 'nurse') && <button onClick={()=>setShowForm(true)} className='bg-blue-500 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-lg ml-20'>Update Vitals</button>}

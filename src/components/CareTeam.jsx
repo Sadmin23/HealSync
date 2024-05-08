@@ -6,7 +6,7 @@ import { CareMembers } from './CareMembers';
 
 export default function CareTeam({patientId}) {
   return (
-    <CommonLayout title="YOUR CARE TEAM">
+    <CommonLayout title="PATIENT CARE TEAM">
       <div className='mt-3 border-t'></div>
       {
         CareMembers.map((member, index) => (
