@@ -21,6 +21,7 @@ import { useSelector } from 'react-redux'
 import PrivateRoute from './utils/ProtectedRoute'
 import PatientDashboard from './pages/patient/Dashboard'
 import TreatmentOverview from './pages/patient/TreatmentOverview'
+import Register from './Register'
 
 export default function App() {
 
@@ -39,6 +40,7 @@ export default function App() {
   return (
     <Router>
     <Routes>
+        <Route path="/register" element={<Register/>}/>
         <Route path="/" element={<AuthenticatedRoute element={<SignIn />} path={"/"}/>} />
         <Route path="/admin" element={<PrivateRoute userType={userType} allowedUserTypes={['Admin']} />}>
             <Route index element={<AdminDashboard />} />
