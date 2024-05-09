@@ -12,13 +12,13 @@ export default function Patients() {
   return (
     <div className='h-screen'>
       {vitals ? (
-        <Vitals role="nurse" patientId={patientId} />
+        <Vitals role="nurse" patientId={patientId} setVitals={setVitals}/>
       ) : (
         <div className='p-8'>
           <h1 className="text-lg font-bold text-green-900 mx-2">PATIENTS</h1>
           <div className='mt-6 flex space-x-5'>
             {PatientList.map((patient, index) => (
-              <PatientCard key={index} patientId={patient.id} role="doctor" setPatientId={setPatientId} setVitals={setVitals} />
+              <PatientCard key={index} patientId={patient.id} role="nurse" setPatientId={setPatientId} setVitals={setVitals} />
             ))}
           </div>
         </div>

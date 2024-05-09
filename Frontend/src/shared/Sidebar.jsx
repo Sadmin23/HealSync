@@ -38,7 +38,7 @@ export default function Sidebar() {
   }
 
   return (
-    <div className='w-64 text-gray-700 border-r border-b rounded-br-md shadow-md bg-white border-gray-300 text-center h-full'>
+    <div className='w-64 text-gray-700 border-r border-b rounded-br-md shadow-md bg-white border-gray-300 text-center h-screen'>
         <img 
           src='avatar.png' 
           alt='logo' 

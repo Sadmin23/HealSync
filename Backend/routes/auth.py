@@ -19,6 +19,6 @@ def authenticate_user(user_type: str, user_id: str, password: str) -> dict:
 async def login(user_type: str, user_id: str, password: str) -> dict:
     user = authenticate_user(user_type, user_id, password)
     if not user:
-        raise HTTPException(status_code=401, detail="Incorrect username or password")
+        raise HTTPException(status_code=401, detail="Incorrect user id or password")
 
     return {"userid": user_id}
