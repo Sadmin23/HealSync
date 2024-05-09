@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from routes.patient import router as patient
 from routes.doctor import router as doctor
 from routes.nurse import router as nurse
+from routes.auth import router as auth
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
@@ -23,6 +24,7 @@ app.add_middleware(
 app.include_router(patient)
 app.include_router(doctor)
 app.include_router(nurse)
+app.include_router(auth)
 
 if __name__ == "__main__":
     import uvicorn

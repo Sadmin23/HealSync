@@ -4,6 +4,7 @@ from pydantic import BaseModel, Field
 class Patient(BaseModel):
     patient_id: str = Field(..., alias="patientId")
     name: str
+    password: str
     gender: str
     age: int
     weight: str

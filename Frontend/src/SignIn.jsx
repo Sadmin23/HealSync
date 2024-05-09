@@ -31,18 +31,10 @@ export default function SignIn() {
       setError('Please fill in all fields.');
       return;
     }
-    // Submit form logic here
-    console.log('Form submitted:', formState);
+
     dispatch(SignInUser(formState));
     navigate(`/${formState.user}`);
   };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log(formData);
-  //   dispatch(SignInUser(formData));
-  //   navigate(`/${formData.user}`);
-  // }
 
   return (
     <div onSubmit={handleSubmit} className='p-3 max-w-lg mx-auto'>
