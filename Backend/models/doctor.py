@@ -1,4 +1,3 @@
-# models/patient.py
 from pydantic import BaseModel, Field
 
 class Doctor(BaseModel):

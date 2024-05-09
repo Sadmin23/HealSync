@@ -1,6 +1,6 @@
 # populate_data.py
 
-from config.config import doctor_collection
+from config.config import nurse_collection
 
 dummy_data = [
     {
@@ -23,4 +23,4 @@ dummy_data = [
 
 # Insert dummy data into MongoDB
 for data in dummy_data:
-    doctor_collection.insert_one(data)
+    nurse_collection.insert_one(data)
