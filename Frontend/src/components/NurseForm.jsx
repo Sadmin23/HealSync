@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 export default function NurseForm() {
 
@@ -11,6 +12,8 @@ export default function NurseForm() {
         gender: 'male',
     });
 
+    const navigate = useNavigate();
+        
     const handleGenderChange = (selectedGender) => {
         setGender(selectedGender);
         setFormData({
@@ -29,9 +32,7 @@ export default function NurseForm() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Send formData to the server
         console.log(formData);
-        // Clear form after submission if needed
         setFormData({
             username: '',
             email: '',
@@ -39,10 +40,11 @@ export default function NurseForm() {
             phone: '',
             gender: 'male',
         });
+        navigate('/');
     }
 
   return (
-    <div className='flex flex-col gap-4 mt-8'>
+    <div className='flex flex-col gap-4'>
     <input
         type='text'
         placeholder='Full Name'

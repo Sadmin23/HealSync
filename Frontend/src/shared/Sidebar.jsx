@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom'
-import { SignOut } from '../redux/user/userSlice';
+import { SignOut } from '../redux/userSlice';
 import { adminLinks, doctorLinks, nurseLinks, patientLinks } from './SidebarData';
 
 export default function Sidebar() {

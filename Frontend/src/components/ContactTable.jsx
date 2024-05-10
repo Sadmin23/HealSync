@@ -21,7 +21,7 @@ export default function ContactTable() {
             <div className="pl-6 py-2 w-60">{contact.email}</div>
             <div className="pl-6 py-2 w-60">{contact.phone}</div>
             <div className='flex items-center ml-6'>
-              <button className='bg-red-600 text-white py-1 px-10 rounded-md'>Email</button>
+              <a href={`mailto:${contact.email}`} className='bg-red-600 text-white py-1 px-10 rounded-md text-center'>Email</a>
             </div>
           </div>
         ))

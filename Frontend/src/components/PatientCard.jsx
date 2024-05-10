@@ -38,8 +38,8 @@ export default function PatientCard({patientId, role, setPatientId, setVitals, s
         </div>
         <div className='font-semibold'>
             <div className='flex space-x-4'>
-              <button className='bg-green-700 text-white w-full py-2 rounded-lg mt-4'>Contact Patient</button>
-              <button className='bg-green-700 text-white w-full py-2 rounded-lg mt-4'>Contact Attendant</button>
+              <a href={`mailto:${patient.attendant_email}`} className='bg-green-700 text-white text-center w-full py-2 rounded-lg mt-4'>Contact Patient</a>
+              <a href={`mailto:${patient.attendant_email}`} className='bg-green-700 text-white text-center w-full py-2 rounded-lg mt-4'>Contact Attendant</a>
             </div>
             {
                 role === 'doctor' && 

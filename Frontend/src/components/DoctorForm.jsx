@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 export default function DoctorForm() {
 
@@ -11,6 +12,8 @@ export default function DoctorForm() {
         phone: '',
         gender: 'male',
     });
+
+    const navigate = useNavigate();
 
     const handleGenderChange = (selectedGender) => {
         setGender(selectedGender);
@@ -41,10 +44,11 @@ export default function DoctorForm() {
             phone: '',
             gender: 'male',
         });
+        navigate('/');
     }
 
   return (
-    <div className='flex flex-col gap-4 mt-8'>
+    <div className='flex flex-col gap-4'>
     <input
         type='text'
         placeholder='Full Name'

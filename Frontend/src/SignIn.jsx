@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux'
-import { SignInUser } from './redux/user/userSlice'
+import { SignInUser } from './redux/userSlice'
 import { useState } from 'react';
 
 export default function SignIn() {
@@ -82,7 +82,7 @@ export default function SignIn() {
       </form>
       <div className='flex gap-2 mt-5'>
         <p>Don't have an account?</p>
-        <Link to={'/sign-in'}>
+        <Link to={'/register'}>
           <span className='text-blue-700'>Sign Up</span>
         </Link>
       </div>
