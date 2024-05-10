@@ -2,13 +2,17 @@ import React, { useEffect, useState } from 'react';
 import CommonLayout from './CommonLayout';
 import PdfUpload from './PdfUpload';
 import pdf from '../assets/pdf.svg';
+import { useSelector } from 'react-redux';
 
 export default function Reports({ update, patientId }) {
   const [pdfList, setPdfList] = useState([]);
   const [showUploadForm, setShowUploadForm] = useState(false);
 
+  const user = useSelector((state) => state.user.currentUser);
+  const userName = user.username;
+
   useEffect(() => {
-    fetch('http://localhost:8000/pdf')
+    fetch(`http://localhost:8000/pdf/${patientId ? patientId : userName}`)
       .then(response => response.json())
       .then(data => setPdfList(data))
       .catch(error => console.error('Error fetching PDF list:', error));
@@ -43,7 +47,7 @@ export default function Reports({ update, patientId }) {
         {pdfList.map((document, index) => (
           <a
             key={index}
-            href={`http://localhost:8000/pdf/${document.filename}`}
+            href={`http://localhost:8000/pdf/${patientId ? patientId : userName}/${document.filename}`}
             target="_blank"
             rel="noopener noreferrer"
             className='flex border-2 border-dotted border-gray-400 rounded-md text-gray-500 p-2 mt-4 w-full hover:bg-slate-100'
@@ -65,7 +69,7 @@ export default function Reports({ update, patientId }) {
                   <h1 className='text-xl font-semibold text-gray-700'>Upload Latest Report Here</h1>
                   <button className="bg-red-500 translate-x-6 -translate-y-4 text-white font-semibold rounded-full px-2  hover:bg-red-700 ml-auto" onClick={() => setShowUploadForm(false)}>X</button>                
                 </div>
-                <PdfUpload onUpload={handleUpload} />
+                <PdfUpload onUpload={handleUpload} patientId={patientId ? patientId : userName}/>
               </div>
             </div>
           )}

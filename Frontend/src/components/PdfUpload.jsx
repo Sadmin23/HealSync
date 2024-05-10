@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const PdfUpload = ({ onUpload }) => {
+const PdfUpload = ({ onUpload, patientId }) => {
   const [file, setFile] = useState(null);
 
   const handleFileChange = (e) => {
@@ -16,7 +16,7 @@ const PdfUpload = ({ onUpload }) => {
       
       try {
         const response = await axios.post(
-          'http://localhost:8000/upload/',
+          `http://localhost:8000/upload/${patientId}`,
           formData,
           {
             headers: {

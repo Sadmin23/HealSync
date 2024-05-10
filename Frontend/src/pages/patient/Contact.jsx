@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import phone from '../../assets/phone.png';
 
 export default function Contact() {
 
@@ -33,12 +34,9 @@ export default function Contact() {
   };
 
   return (
-    <div className='h-screen flex ml-96 mt-40'>
-      <button
-        className='bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded h-10'
-        onClick={handleEmergencyCall} // Attach the event handler to the onClick event
-      >
-        Emergency Call
+    <div className='h-screen flex'>
+      <button onClick={handleEmergencyCall}>
+        <img src={phone} alt='phone' className='h-[500px] w-[500px]' />
       </button>
     </div>
   );
