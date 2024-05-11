@@ -6,14 +6,17 @@ export default function DoctorForm() {
     const [gender, setGender] = useState('male');
     const [formData, setFormData] = useState({
         username: '',
-        email: '',
-        password: '',
+        fullname: '',
+        gender: 'male',
         specialization: '',
         phone: '',
-        gender: 'male',
+        email: '',
+        password: '',
     });
 
     const navigate = useNavigate();
+
+    const [error, setError] = useState('');    
 
     const handleGenderChange = (selectedGender) => {
         setGender(selectedGender);
@@ -21,6 +24,7 @@ export default function DoctorForm() {
             ...formData,
             gender: selectedGender,
         });
+        if (error) setError('');
     }
 
     const handleChange = (e) => {
@@ -29,22 +33,51 @@ export default function DoctorForm() {
             ...formData,
             [name]: value,
         });
+        if (error) setError('');
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Send formData to the server
-        console.log(formData);
-        // Clear form after submission if needed
-        setFormData({
-            username: '',
-            email: '',
-            password: '',
-            specialization: '',
-            phone: '',
-            gender: 'male',
-        });
-        navigate('/');
+    const handleSubmit = async (e) => {
+
+        if (
+            !formData.fullname ||
+            !formData.email ||
+            !formData.username ||
+            !formData.password ||
+            !formData.phone ||
+            !formData.specialization
+        ) {
+            setError('Please fill in all fields.');
+            return;
+        }
+
+        try {
+            const response = await fetch('http://127.0.0.1:8000/api/doctor/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    "username": formData.username,
+                    "name": formData.fullname,
+                    "gender": formData.gender,
+                    "specialization": formData.specialization,
+                    "phone": formData.phone,
+                    "email": formData.email,
+                    "password": formData.password,
+                    "role": 'doctor',
+                }),
+            });
+    
+            if (!response.ok) {
+                throw new Error('Failed to register doctor');
+            }
+    
+            navigate('/');
+            
+        }
+        catch (error) {
+            console.error('Error:', error);
+        }
     }
 
   return (
@@ -53,9 +86,9 @@ export default function DoctorForm() {
         type='text'
         placeholder='Full Name'
         className='border p-3 rounded-lg'
-        id='username'
-        name='username'
-        value={formData.username}
+        id='fullname'
+        name='fullname'
+        value={formData.fullname}
         onChange={handleChange}
         required
     />
@@ -69,16 +102,28 @@ export default function DoctorForm() {
         onChange={handleChange}
         required
     />
-    <input
-        type='password'
-        placeholder='Password'
-        className='border p-3 rounded-lg'
-        id='password'
-        name='password'
-        value={formData.password}
-        onChange={handleChange}
-        required
-    />
+    <div className='flex space-x-6'>
+        <input
+          type='text'
+          placeholder='Username'
+          className='border p-3 rounded-lg w-1/2'
+          id='username'
+          name='username'
+          value={formData.username}
+          onChange={handleChange}
+          required={true}
+        />
+        <input
+          type='password'
+          placeholder='Password'
+          className='border p-3 rounded-lg w-1/2'
+          id='password'
+          name='password'
+          value={formData.password}
+          onChange={handleChange}
+          required={true}
+        />
+    </div>
     <input
         type='text'
         placeholder='Specialization'
@@ -128,6 +173,7 @@ export default function DoctorForm() {
     >
         Register
     </button>
+    {error && <div className="text-red-500 mt-2">{error}</div>}
 </div>
   )
 }

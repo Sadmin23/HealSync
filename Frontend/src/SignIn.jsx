@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux'
 import { SignInUser } from './redux/userSlice'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function SignIn() {
 
@@ -24,16 +24,44 @@ export default function SignIn() {
     if (error) setError('');
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const { user, username, password } = formState;
+    let { user, username, password } = formState;
+
     if (user === 'None' || !username.trim() || !password.trim()) {
       setError('Please fill in all fields.');
       return;
     }
 
-    dispatch(SignInUser(formState));
-    navigate(`/${formState.user}`);
+    user = formState.user.toLowerCase();
+
+    try {
+        const response = await fetch(`http://127.0.0.1:8000/api/${user}/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                "role": user,
+                "username": username,
+                "password": password
+            }),
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to Sign In');
+        }
+
+        const data = await response.json();
+        console.log(data);
+        
+    }
+    catch (error) {
+        console.error('Error:', error);
+    }
+
+    // dispatch(SignInUser(formState));
+    // navigate(`/${formState.user}`);
   };
 
   return (
