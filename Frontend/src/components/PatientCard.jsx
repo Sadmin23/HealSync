@@ -1,6 +1,9 @@
 import React from 'react'
-import nurse from '../assets/nurse.jpg'
 import PatientList from '../pages/doctor/PatientList';
+import patient1 from '../assets/patient1.jpg';
+import patient2 from '../assets/patient2.jpg';
+import patient3 from '../assets/patient3.jpg';
+import patient4 from '../assets/patient4.jpg';
 
 export default function PatientCard({patientId, role, setPatientId, setVitals, setTreatment}) {
     
@@ -19,7 +22,7 @@ export default function PatientCard({patientId, role, setPatientId, setVitals, s
   return (
     <div className='bg-white w-96 border border-gray-300 shadow-md rounded-lg p-6'>
         <div className='flex items-center border-b-2 pb-4'>
-          <img src={nurse} alt='nurse' className='h-16 w-16 rounded-full' />
+          <img src={patient1} alt='nurse' className='h-16 w-16 rounded-full' />
           <div className='ml-8 font-semibold space-y-2'>
             <h1 className='text-green-600'>{patient.name}</h1>
             <h1 className='text-gray-600'>Patient ID: {patient.id}</h1>

@@ -4,6 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom'
 import { SignOut } from '../redux/userSlice';
 import { adminLinks, doctorLinks, nurseLinks, patientLinks } from './SidebarData';
+import avatar1 from '../assets/avatar1.png';
+import avatar2 from '../assets/avatar2.png';
+
 
 export default function Sidebar() {
 
@@ -40,7 +43,7 @@ export default function Sidebar() {
   return (
     <div className='w-64 text-gray-700 border-r border-b rounded-br-md shadow-md bg-white border-gray-300 text-center h-screen'>
         <img 
-          src='avatar.png' 
+          src={avatar1} 
           alt='logo' 
           className='w-28 h-20 mx-auto mt-5'
         />

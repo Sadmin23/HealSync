@@ -3,6 +3,11 @@ import { Outlet } from 'react-router-dom'
 import Header from './Header'
 import Sidebar from './Sidebar'
 import { useSelector } from 'react-redux';
+import phone from '../assets/phone.png';
+import patient1 from '../assets/patient1.jpg';
+import patient2 from '../assets/patient2.jpg';
+import patient3 from '../assets/patient3.jpg';
+import patient4 from '../assets/patient4.jpg';
 
 export default function Layout() {
 
@@ -11,7 +16,6 @@ export default function Layout() {
 
   const [emergencies, setEmergencies] = useState([]);
   const [showForm, setShowForm] = useState(false);
-  const [responded, setResponded] = useState(false);
   const [caller, setCaller] = useState('');
 
   const calculateTimeDifference = (time1, time2) => {
@@ -51,8 +55,11 @@ export default function Layout() {
   };
 
   useEffect(() => {
-    const intervalId = setInterval(fetchEmergencies, 3000);
-    return () => clearInterval(intervalId);
+    if (userType === 'Doctor')
+    {
+      const intervalId = setInterval(fetchEmergencies, 3000);
+      return () => clearInterval(intervalId);
+    }
   }, []);
 
 
@@ -94,11 +101,14 @@ export default function Layout() {
         {showForm && (
           <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-50">
             <div className="bg-white px-12 pt-8 pb-8 rounded-lg">
-              <h1 className='text-xl font-semibold text-gray-700 mb-8'>{caller} is making an emergency call</h1>
+              <img src={patient1} alt='patient' className='h-32 w-32 rounded-full mx-auto mb-2'/>
+              <h1 className='text-xl font-bold text-gray-700 mb-1 text-center'>{caller || `John Smith`} </h1>
+              <h1 className='text-lg font-semibold text-gray-700 mb-4'>is making an emergency call</h1>
               <div className='bg-white'>
                 <div className="flex justify-center">
-                  <button type="submit" className="bg-red-600 hover:bg-red-900 text-white text-lg font-semibold py-4 px-6 rounded-md hover:bg-primary-600" onClick={handleEmergencyCall}>
-                    Respond
+                  <button className="bg-[#fc445c] flex items-center text-white text-xl tracking-wider font-bold pl-1 pr-6 rounded-md " onClick={handleEmergencyCall}>
+                    <img src={phone} alt='phone' className='h-16 w-16'/>
+                    <span>Respond</span>
                   </button>
                 </div>
               </div>
