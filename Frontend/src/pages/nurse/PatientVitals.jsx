@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
 import PatientCard from '../../components/PatientCard';
-import PatientList from '../doctor/PatientList';
 import Vitals from '../patient/Vitals';
 import { useSelector } from 'react-redux';
 
@@ -12,8 +11,6 @@ export default function Patients() {
   const user = useSelector((state) => state.user.currentUser);
 
   const nurseId = user.userId;
-
-  console.log(nurseId);
 
   useEffect(() => {
     fetch(`http://127.0.0.1:8000/api/patientnurse/nurse/${nurseId}`)

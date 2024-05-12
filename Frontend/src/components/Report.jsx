@@ -8,6 +8,10 @@ export default function Reports({ update, patientId }) {
   const [pdfList, setPdfList] = useState([]);
   const [showUploadForm, setShowUploadForm] = useState(false);
 
+  const user = useSelector((state) => state.user.currentUser);
+
+  const username = user.username;
+
   useEffect(() => {
     fetch(`http://localhost:8000/pdf/${patientId}`)
       .then(response => response.json())
@@ -22,16 +26,16 @@ export default function Reports({ update, patientId }) {
     const formattedDate = currentDate.toLocaleDateString('en-GB'); // Format date as 'DD/MM/YYYY'
     const formattedTime = currentDate.toLocaleTimeString('en-US', { hour12: false }); // Format time as 'HH:MM'
 
-    await fetch('http://127.0.0.1:8000/timeline', {
+    await fetch('http://127.0.0.1:8000/api/timeline', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        title: 'Diagnostic Report',
-        description: 'Diagnostic Report has been updated by Dr. John Doe.',
-        date: formattedDate,
-        time: formattedTime
+        "title": 'Diagnostic Report',
+        "patient_id": patientId,
+        "time": formattedDate + ' ' + formattedTime,
+        "description": `Doctor ${username} uploaded a new diagnostic report`,
       }),
     });
     

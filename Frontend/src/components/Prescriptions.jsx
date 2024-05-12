@@ -4,23 +4,29 @@ import CommonLayout from './CommonLayout';
 import pill from '../assets/medicine.png';
 import syringe from '../assets/syringe.png';
 import syrup from '../assets/syrup.png';
+import { useSelector } from 'react-redux';
 
 export default function Prescriptions({update, patientId}) {
 
   const [medicines, setMedicines] = useState([]);
   const [showForm, setShowForm] = useState(false);
 
+  const user = useSelector((state) => state.user.currentUser);
+
+  const username = user.username;
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = {
-      name: formData.get('name'),
-      dose: formData.get('dose'),
-      type: formData.get('type')
+      "name": formData.get('name'),
+      "patient_id": patientId,
+      "type": formData.get('type'),
+      "dose": formData.get('dose'),
     };
   
     try {
-      const response = await fetch('http://localhost:8000/prescription', {
+      const response = await fetch(`http://127.0.0.1:8000/api/medicine`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -38,16 +44,16 @@ export default function Prescriptions({update, patientId}) {
       const formattedDate = currentDate.toLocaleDateString('en-GB'); // Format date as 'DD/MM/YYYY'
       const formattedTime = currentDate.toLocaleTimeString('en-US', { hour12: false }); // Format time as 'HH:MM'
   
-      await fetch('http://127.0.0.1:8000/timeline', {
+      await fetch('http://127.0.0.1:8000/api/timeline', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          title: 'Prescription',
-          description: 'Prescription updated by Dr. John Doe.',
-          date: formattedDate,
-          time: formattedTime
+          "title": 'Prescription',
+          "patient_id": patientId,
+          "time": formattedDate + ' ' + formattedTime,
+          "description": `Your prescription has been updated by doctor ${username}`,
         }),
       });
 
@@ -59,10 +65,10 @@ export default function Prescriptions({update, patientId}) {
   };
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/prescription')
+    fetch(`http://127.0.0.1:8000/api/medicine/${patientId}`)
       .then(response => {
         if (!response.ok) {
-          throw new Error('Failed to prescription data');
+          throw new Error('Failed to fetch prescription data');
         }
         return response.json();
       })
