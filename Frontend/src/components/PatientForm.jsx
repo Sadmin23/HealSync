@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 export default function PatientForm() {
@@ -18,6 +18,63 @@ export default function PatientForm() {
         attendant_email: '',
         attendant_phone: '',
     });
+
+    const [nurseData, setNurseData] = useState([]);
+    const [nurseLength, setNurseLength] = useState(0);
+    const [doctorData, setDoctorData] = useState([]);
+    const [doctorLength, setDoctorLength] = useState(0);
+    const [patientData, setPatientData] = useState({});
+
+    function generateUniqueRandomNumbers(length) {
+        if (length <= 1) {
+            return [0];
+        }
+    
+        const numbers = [];
+        let num1 = Math.floor(Math.random() * length);
+    
+        numbers.push(num1);
+    
+        let num2;
+        do {
+            num2 = Math.floor(Math.random() * length);
+        } while (num2 === num1);
+    
+        numbers.push(num2);
+    
+        return numbers;
+    }
+
+    useEffect(() => {
+        fetch('http://127.0.0.1:8000/api/nurse')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Failed to fetch nurse data');
+          }
+          return response.json();
+        })
+        .then(data => {
+            setNurseData(data)
+            setNurseLength(data.length)
+          }
+        )
+        .catch(error => console.error('Error fetching nurse data:', error));
+        
+        fetch('http://127.0.0.1:8000/api/doctor')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Failed to fetch doctor data');
+          }
+          return response.json();
+        })
+        .then(data => {
+            setDoctorData(data)
+            setDoctorLength(data.length)
+          }
+        )
+        .catch(error => console.error('Error fetching doctor data:', error));        
+    }, []);
+
 
     const navigate = useNavigate();
 
@@ -44,6 +101,166 @@ export default function PatientForm() {
         if (error) setError('');
     }
 
+    const assignDoctor = async (index, iteration) => {
+
+        const doctor = doctorData[index];
+
+        console.log('doctor');
+
+        try {
+            const response = await fetch('http://127.0.0.1:8000/api/patientdoctor', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    "patient_id": patientData.id,
+                    "patient_name": patientData.name,
+                    "doctor_id": doctor.id,
+                    "doctor_name": doctor.name,
+                    "type": iteration ? 'Treatment' : 'Emergency',
+                    "time": iteration ? '12:00 am - 12:15 am' : '',
+                }),
+            });
+    
+            if (!response.ok) {
+                throw new Error('Failed to assign doctor');
+            }
+        }
+        catch (error) {
+            console.error('Error:', error);
+        }
+    }
+
+    const assignNurse = async (index, iteration) => {
+
+        const nurse = nurseData[index];
+
+        console.log(nurse);
+
+        try {
+            const response = await fetch('http://127.0.0.1:8000/api/patientnurse', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    "patient_id": patientData.id,
+                    "patient_name": patientData.name,
+                    "nurse_id": nurse.id,
+                    "nurse_name": nurse.name,
+                    "type": iteration ? 'Vitals Checkup' : 'Medication',
+                    "time": iteration ? '9:00 am - 9:15 am' : '2:00 pm - 2:15 pm',
+                }),
+            });
+    
+            if (!response.ok) {
+                throw new Error('Failed to assign nurse');
+            }
+        }
+        catch (error) {
+            console.error('Error:', error);
+        }
+    }
+
+    const addEvent = async ()=>{
+
+        const currentDate = new Date();
+        const formattedDate = currentDate.toLocaleDateString('en-GB'); // Format date as 'DD/MM/YYYY'
+        const formattedTime = currentDate.toLocaleTimeString('en-US', { hour12: false }); // Format time as 'HH:MM'
+
+
+        try {
+            const response = await fetch('http://127.0.0.1:8000/api/timeline', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    "title": "Patient Registration",
+                    "patient_id": patientData.id,
+                    "time": formattedDate + ' ' + formattedTime,
+                    "description": "You registered successfully to HealSync. Doctors and Nurses has been assigned for your treatment, vitals checkup and medication.",
+                }),
+            });
+    
+            if (!response.ok) {
+                throw new Error('Failed to add Event');
+            }
+        }
+        catch (error) {
+            console.error('Error:', error);
+        }        
+    }
+
+    const addVitalsData = async () => {
+
+        try {
+            const response = await fetch('http://127.0.0.1:8000/api/vitals', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    "patient_id": patientData.id,
+                    "labels": [
+                      "18/04", "19/04", "20/04", "21/04", "22/04", "23/04", "24/04"
+                    ],
+                    "datasets": [
+                          {
+                              "label": "Body Temp",
+                              "data": [36.5, 36.7, 36.8, 36.9, 37.0, 37.1, 37.2]
+                          },
+                          {   "label": "Pulse", 
+                              "data": [70, 72, 74, 76, 75, 80, 82]
+                          },
+                          {   "label": "Breathing Rate", 
+                              "data": [12, 14, 16, 15, 20, 22, 24]
+                          },
+                          {
+                              "label": "Systolic Pressure",
+                              "data": [120, 125, 122, 118, 121, 119, 123]
+                          },
+                          {
+                              "label": "Diasystolic Pressure",
+                              "data": [80, 85, 82, 78, 81, 79, 83]
+                          }
+                    ]
+                }),
+            });
+    
+            if (!response.ok) {
+                throw new Error('Failed to add Vitals Data');
+            }
+        }
+        catch (error) {
+            console.error('Error:', error);
+        } 
+    }
+
+
+    useEffect(() => {
+
+        if (patientData.id) {
+
+            console.log('patient data useEffect if');
+
+            const doctorIndices = generateUniqueRandomNumbers(doctorLength);
+            const nurseIndices = generateUniqueRandomNumbers(nurseLength);
+
+            doctorIndices.forEach((index, iteration) => assignDoctor(index, iteration));
+            nurseIndices.forEach((index, iteration) => assignNurse(index, iteration));
+
+            addEvent();
+            addVitalsData();
+
+            navigate('/');
+        }
+
+    }, [patientData])
+    
+
+
     const handleSubmit = async (e) => {
         if (
             !formData.fullname || !formData.email || !formData.username ||
@@ -55,8 +272,6 @@ export default function PatientForm() {
             setError('Please fill in all fields.');
             return;
         }
-
-        console.log(formData);
 
         try {
             const response = await fetch('http://127.0.0.1:8000/api/patient/register', {
@@ -84,8 +299,11 @@ export default function PatientForm() {
             if (!response.ok) {
                 throw new Error('Failed to register patient');
             }
-    
-            navigate('/');
+
+            const data = await response.json();
+            setPatientData(data.patient);
+
+            // navigate('/');
         }
         catch (error) {
             console.error('Error:', error);
@@ -232,7 +450,7 @@ export default function PatientForm() {
                 onChange={handleChange}
                 required
             />
-        </div>                 
+        </div>              
         <button 
             className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80'
             onClick={handleSubmit}

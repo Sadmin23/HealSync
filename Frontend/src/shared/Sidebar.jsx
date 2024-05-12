@@ -19,16 +19,16 @@ export default function Sidebar() {
   const userType = user.user;
 
   switch (userType) {
-    case 'Doctor':
+    case 'doctor':
       navigationLinks = doctorLinks
       break;
-    case 'Nurse':
+    case 'nurse':
       navigationLinks = nurseLinks
       break;
-    case 'Patient':
+    case 'patient':
       navigationLinks = patientLinks
       break;
-    case 'Admin':
+    case 'admin':
       navigationLinks = adminLinks
       break;
     default:

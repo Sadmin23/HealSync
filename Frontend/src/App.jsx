@@ -29,8 +29,6 @@ export default function App() {
 
     const userType = user.user;
 
-    console.log(userType);
-
     const AuthenticatedRoute = ({ element, path }) => {
         return (userType !== 'None') ? (
           <Navigate to={userType} replace state={{ from: path }} />

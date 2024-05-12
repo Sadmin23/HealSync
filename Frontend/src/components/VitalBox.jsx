@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Vital_Box({ title, value, unit, selected }) {
+export default function VitalBox({ title, value, unit, selected }) {
 
   const bgColor = selected ? 'bg-green-700 text-white' : 'bg-slate-200'
 

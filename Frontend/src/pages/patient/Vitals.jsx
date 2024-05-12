@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js";
 import LineChart from "../../components/LineChart";
-import Vital_Box from "../../components/Vital_Box";
 import Welcome from "../../components/Welcome";
 import { data_range, vital_data } from "./data";
+import VitalBox from '../../components/VitalBox';
 
 Chart.register(CategoryScale);
 
@@ -14,10 +14,9 @@ export default function Vitals({role, patientId, setVitals}) {
   const [value, setValue] = useState(["0", "0", "0", "0/0"]);
   const [showForm, setShowForm] = useState(false);
 
-  console.log(patientId);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/vitals')
+    fetch(`http://127.0.0.1:8000/api/vitals/${patientId}`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Failed to fetch vitals data');
@@ -30,11 +29,35 @@ export default function Vitals({role, patientId, setVitals}) {
       .catch(error => console.error('Error fetching vitals data:', error));
   }, []);
 
+  const convertDatasets = () => {
+    const updatedDatasets = vitalsData.datasets.slice(0, 3);
+    const pressureData = vitalsData.datasets.slice(3);
+    
+    if (!vitalsData || !vitalsData.datasets || Array.isArray(pressureData[0])) {
+      return;
+    }
+
+    const pressureDataset = [
+        {
+            "label": "Systolic Pressure",
+            "data": pressureData[0].data,
+        },
+        {
+            "label": "Diasystolic Pressure",
+            "data": pressureData[1].data,
+        },
+    ];
+
+    updatedDatasets.push(pressureDataset);
+
+    setVitalsData({ ...vitalsData, datasets: updatedDatasets });
+  };  
 
   useEffect(() => {
     if (vitalsData && vitalsData.datasets) {
       const updatedValues = vitalsData.datasets.map((_, index) => getLastValueOfDataset(index));
       setValue(updatedValues);
+      convertDatasets();
     }
   }, [vitalsData]);
 
@@ -195,7 +218,7 @@ export default function Vitals({role, patientId, setVitals}) {
         <div className="w-[450px] grid grid-cols-2 gap-5 text-slate-400 font-semibold">
           {vital_data.map((vital, index) => (
             <button onClick={() => setSelected(index)} key={index} className="text-left">
-              <Vital_Box title={vital.label} value={value[index]} unit={vital.unit} selected={selected === index} />
+              <VitalBox title={vital.label} value={value[index]} unit={vital.unit} selected={selected === index} />
             </button>
           ))}
 
