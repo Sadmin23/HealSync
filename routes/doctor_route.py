@@ -43,12 +43,12 @@ async def login_doctor(doctorLogin: DoctorLogin):
 
   
 @router.put('/{id}',status_code=status.HTTP_200_OK)
-async def update_doctor(id: str, doctor: Doctor):
+async def update_doctor(id: str, doctor_data: Doctor):
     obj = doctor.find_one({'_id': ObjectId(id)})
 
     if obj is not None:
-        doctorObj = doctor.find_one_and_update({'_id': ObjectId(id)},{'$set':dict(doctor)}) 
-        return {'message': 'Doctor updated...', doctorObj: doctorObj}
+        doctorObj = doctor.find_one_and_update({'_id': ObjectId(id)},{'$set':dict(doctor_data)}) 
+        return {'message': 'Doctor updated...', 'doctorObj': Doctor(**doctorObj)}
     else:
         return JSONResponse(content={'message': f'Doctor with {id} not found!...'},status_code=404)
 
