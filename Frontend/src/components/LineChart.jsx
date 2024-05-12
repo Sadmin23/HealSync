@@ -15,7 +15,7 @@ export default function LineChart({ chartData, vitalIndex, minmax }) {
               display: false,
             },
             legend: {
-              display: vitalIndex === 3 ? true : false,
+              display: true,
             }
           },
           elements: {

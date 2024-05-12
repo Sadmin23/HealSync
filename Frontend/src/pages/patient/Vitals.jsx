@@ -5,6 +5,7 @@ import LineChart from "../../components/LineChart";
 import Welcome from "../../components/Welcome";
 import { data_range, vital_data } from "./data";
 import VitalBox from '../../components/VitalBox';
+import { useSelector } from 'react-redux';
 
 Chart.register(CategoryScale);
 
@@ -13,6 +14,11 @@ export default function Vitals({role, patientId, setVitals}) {
   const [selected, setSelected] = useState(0);
   const [value, setValue] = useState(["0", "0", "0", "0/0"]);
   const [showForm, setShowForm] = useState(false);
+  const [patientName, setPatientName] = useState('');
+
+  const user = useSelector((state) => state.user.currentUser);
+
+  const username = user.username;
 
 
   useEffect(() => {
@@ -27,6 +33,18 @@ export default function Vitals({role, patientId, setVitals}) {
         setVitalsData(data)
       )
       .catch(error => console.error('Error fetching vitals data:', error));
+
+    fetch(`http://127.0.0.1:8000/api/patient/${patientId}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to fetch patient data');
+        }
+        return response.json();
+      })
+      .then(data => 
+        setPatientName(data.name)
+      )
+      .catch(error => console.error('Error fetching patient data:', error));
   }, []);
 
   const convertDatasets = () => {
@@ -77,12 +95,14 @@ export default function Vitals({role, patientId, setVitals}) {
     const label = `${day}/${month}`;
   
     const data = {
-      label: label,
-      data: [parseFloat(temp), parseInt(pulse), parseInt(breaths), parseInt(sysPressure), parseInt(diasPressure)]
+      "labels": label,
+      "data": [parseFloat(temp), parseInt(pulse), parseInt(breaths), parseInt(sysPressure), parseInt(diasPressure)]
     };
+
+    console.log(data);
   
     try {
-      const response = await fetch('http://localhost:8000/vitals', {
+      const response = await fetch(`http://127.0.0.1:8000/api/vitals/${patientId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -94,7 +114,7 @@ export default function Vitals({role, patientId, setVitals}) {
         throw new Error('Failed to update vitals data');
       }
   
-      const updatedDataResponse = await fetch('http://localhost:8000/vitals');
+      const updatedDataResponse = await fetch(`http://127.0.0.1:8000/api/vitals/${patientId}`);
       if (!updatedDataResponse.ok) {
         throw new Error('Failed to fetch updated vitals data');
       }
@@ -106,16 +126,16 @@ export default function Vitals({role, patientId, setVitals}) {
       const formattedDate = currentDate.toLocaleDateString('en-GB'); // Format date as 'DD/MM/YYYY'
       const formattedTime = currentDate.toLocaleTimeString('en-US', { hour12: false }); // Format time as 'HH:MM'
   
-      await fetch('http://127.0.0.1:8000/timeline', {
+      await fetch('http://127.0.0.1:8000/api/timeline/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          title: 'Vitals Checkup',
-          description: 'Vitals updated by sister Jane Doe.',
-          date: formattedDate,
-          time: formattedTime
+          "title": 'Vitals Checkup',
+          "patient_id": patientId,
+          "time": formattedDate + ' ' + formattedTime,
+          "description": `Your vitals has been updated by sister ${username}`,
         }),
       });
 
@@ -164,7 +184,7 @@ export default function Vitals({role, patientId, setVitals}) {
       {(role === 'patient') && <Welcome />}
       {(role !== 'patient') && <button onClick={handleBack} className='mt-4 ml-2 bg-blue-500 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg'>Back</button>}
       <div className='flex justify-between items-center'>
-        <h1 className="text-lg my-4 font-bold text-slate-400 mx-2">VITALS (Last update on {getLastDate()})</h1>
+        <h1 className="text-lg my-4 font-bold text-green-700 mx-2">{patientName}'s Vitals (Last update on {getLastDate()})</h1>
         {(role === 'nurse') && <button onClick={()=>setShowForm(true)} className='bg-blue-500 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-lg ml-20'>Update Vitals</button>}
         {showForm && (
             <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-50">
