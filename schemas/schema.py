@@ -67,6 +67,8 @@ def individual_seriallizer_emergency(emergency) -> dict:
         'patient_id': emergency['patient_id'],
         'action': emergency['action'],
         'time': emergency['time'],
+        'gender': emergency['gender'],
+
     }
  
 
@@ -81,7 +83,7 @@ def individual_seriallizer_timeline(timeline) -> dict:
         'title': timeline['title'],
         'description': timeline['description'],
         'patient_id': timeline['patient_id'],
-        'time': timeline['time'],
+        'time': timeline['time'], 
     }
  
 
