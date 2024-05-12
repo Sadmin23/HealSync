@@ -2,8 +2,10 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   currentUser: {
+    userId: 'None',
     username: 'John Doe',
-    user: 'None'
+    user: 'None',
+    gender: 'None',
   },
 }
 
@@ -16,8 +18,10 @@ export const userSlice = createSlice({
     },
     SignOut: (state) => {
       state.currentUser = {
+        userId: 'None',
         username: 'None',
-        user: 'None'
+        user: 'None',
+        gender: 'None'
       };
     },
   },

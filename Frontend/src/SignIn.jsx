@@ -10,6 +10,9 @@ export default function SignIn() {
     username: '',
     password: ''
   });
+
+  const [userdata, setUserdata] = useState({});
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -17,12 +20,24 @@ export default function SignIn() {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
+    if (error) setError('');
     setFormState((prevState) => ({
       ...prevState,
       [name]: value
     }));
-    if (error) setError('');
   };
+
+  useEffect(() => {
+    if (userdata.id) { // Assuming `id` is a good indicator that userdata is populated
+      dispatch(SignInUser({
+        userId: userdata.id,
+        username: userdata.username,
+        user: formState.user.toLowerCase(),
+        gender: userdata.gender
+      }));
+      navigate(`/${formState.user}`);
+    }
+  }, [userdata, dispatch, navigate, formState.user]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -33,7 +48,7 @@ export default function SignIn() {
       return;
     }
 
-    user = formState.user.toLowerCase();
+    user = user.toLowerCase();
 
     try {
         const response = await fetch(`http://127.0.0.1:8000/api/${user}/login`, {
@@ -53,13 +68,15 @@ export default function SignIn() {
         }
 
         const data = await response.json();
-        console.log(data);
+        setUserdata(data);
         
+        dispatch(SignInUser({userId: data.id, username: data.name, user: user, gender: data.gender}));
+        navigate(`/${formState.user}`);
     }
     catch (error) {
         console.error('Error:', error);
+        setError('Invalid credentials. Please try again.')
     }
-
     // dispatch(SignInUser(formState));
     // navigate(`/${formState.user}`);
   };

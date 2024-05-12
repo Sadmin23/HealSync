@@ -29,6 +29,8 @@ export default function App() {
 
     const userType = user.user;
 
+    console.log(userType);
+
     const AuthenticatedRoute = ({ element, path }) => {
         return (userType !== 'None') ? (
           <Navigate to={userType} replace state={{ from: path }} />
@@ -42,26 +44,26 @@ export default function App() {
     <Routes>
         <Route path="/register" element={<Register/>}/>
         <Route path="/" element={<AuthenticatedRoute element={<SignIn />} path={"/"}/>} />
-        <Route path="/admin" element={<PrivateRoute userType={userType} allowedUserTypes={['Admin']} />}>
+        <Route path="/admin" element={<PrivateRoute userType={userType} allowedUserTypes={['admin']} />}>
             <Route index element={<AdminDashboard />} />
             <Route path='emergencies' element={<AllEmergencies />} />
             <Route path='patient-list' element={<AllPatients />} />
             <Route path='doctor-list' element={<AllDoctors />} />
             <Route path='nurse-list' element={<AllNurses />} />
         </Route>
-        <Route path="/patient" element={<PrivateRoute userType={userType} allowedUserTypes={['Patient']} />}>
+        <Route path="/patient" element={<PrivateRoute userType={userType} allowedUserTypes={['patient']} />}>
             <Route index element={<PatientDashboard />} />
             <Route path='treatment-plan' element={<TreatmentOverview />} />
             <Route path='medical-record' element={<MedicalRecord />} />
             <Route path='contact' element={<Contact />} />
         </Route>
-        <Route path="/doctor" element={<PrivateRoute userType={userType} allowedUserTypes={['Doctor']} />}>
+        <Route path="/doctor" element={<PrivateRoute userType={userType} allowedUserTypes={['doctor']} />}>
             <Route index element={<DoctorDashboard />} />
             <Route path='emergencies' element={<Emergencies />} />
             <Route path='patient-list' element={<Patients />} />
             <Route path='contact' element={<DoctorContact />} />
         </Route>
-        <Route path="/nurse" element={<PrivateRoute userType={userType} allowedUserTypes={['Nurse']} />}>
+        <Route path="/nurse" element={<PrivateRoute userType={userType} allowedUserTypes={['nurse']} />}>
             <Route index element={<NurseDashboard />} />
             <Route path='patient-vitals' element={<PatientVitals />} />
             <Route path='contact' element={<NurseContact />} />
