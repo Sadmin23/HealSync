@@ -22,7 +22,7 @@ async def create_vitals(vital_data: VitalData):
     document = vital_data.dict() 
     result = vitals.insert_one(document)
     return {"message": "Vital data created successfully", "inserted_id": str(result.inserted_id)}
-
+ 
 
   
 @router.put('/{id}',status_code=status.HTTP_200_OK)
