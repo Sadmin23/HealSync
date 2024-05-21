@@ -2,17 +2,22 @@
 import React from 'react';
 import CommonLayout from './CommonLayout';
 import CareMember from './CareMember';
-import { CareMembers } from './CareMembers';
 
-export default function CareTeam({patientId, team}) {
+export default function CareTeam({nurse, doctor}) {
+
   return (
     <CommonLayout title="PATIENT CARE TEAM">
       <div className='mt-3 border-t'></div>
       {
-        CareMembers.map((member, index) => (
-          <CareMember key={index} {...member} />
+        nurse.map((member, index) => (
+          <CareMember key={index} name={member.nurse_name} designation="Nurse" type={member.type}/>
         ))
       }
+      {
+        doctor.map((member, index) => (
+          <CareMember key={index} name={member.doctor_name} designation="Doctor" type={member.type}/>
+        ))
+      }      
     </CommonLayout>
   );
 }
