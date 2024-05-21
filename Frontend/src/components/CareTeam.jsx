@@ -4,7 +4,7 @@ import CommonLayout from './CommonLayout';
 import CareMember from './CareMember';
 import { CareMembers } from './CareMembers';
 
-export default function CareTeam({patientId}) {
+export default function CareTeam({patientId, team}) {
   return (
     <CommonLayout title="PATIENT CARE TEAM">
       <div className='mt-3 border-t'></div>
