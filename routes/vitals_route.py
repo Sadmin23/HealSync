@@ -31,7 +31,7 @@ async def update_vitals(id: str, vital_data: UpdateVitals):
         
     
     if obj is not None:
-        document = VitalData(**obj)
+        document = VitalData(**obj) 
         document.labels.append(vital_data.labels)
         for i in range(5):
             document.datasets[i].data.append(vital_data.data[i])
