@@ -17,7 +17,7 @@ async def upload_pdf(username: str, file: UploadFile = File(...)):
         shutil.copyfileobj(file.file, buffer)
 
     return {"filename": file.filename}
- 
+  
 
 @router.get("/pdf/{username}/{filename}")
 async def get_pdf(username: str, filename: str):
