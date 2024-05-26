@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import Contacts from './Contacts'
 import { useSelector } from 'react-redux';
 
 export default function ContactTable() {
