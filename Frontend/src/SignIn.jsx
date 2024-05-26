@@ -28,7 +28,7 @@ export default function SignIn() {
   };
 
   useEffect(() => {
-    if (userdata.id) { // Assuming `id` is a good indicator that userdata is populated
+    if (userdata.id) {
       dispatch(SignInUser({
         userId: userdata.id,
         username: userdata.username,
@@ -50,36 +50,45 @@ export default function SignIn() {
 
     user = user.toLowerCase();
 
-    try {
-        const response = await fetch(`http://127.0.0.1:8000/api/${user}/login`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                "role": user,
-                "username": username,
-                "password": password
-            }),
-        });
+    if (user !== 'admin')
+    {
+      try {
+          const response = await fetch(`http://127.0.0.1:8000/api/${user}/login`, {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                  "role": user,
+                  "username": username,
+                  "password": password
+              }),
+          });
 
-        if (!response.ok) {
-            throw new Error('Failed to Sign In');
-        }
+          if (!response.ok) {
+              throw new Error('Failed to Sign In');
+          }
 
-        const data = await response.json();
-        setUserdata(data);
-        
-        dispatch(SignInUser({userId: data.id, username: data.name, user: user, gender: data.gender}));
-        navigate(`/${formState.user}`);
+          const data = await response.json();
+          setUserdata(data);
+
+          dispatch(SignInUser({userId: data.id, username: data.name, user: user, gender: data.gender}));
+          navigate(`/${formState.user}`);
+      }
+      catch (error) {
+          console.error('Error:', error);
+          setError('Invalid credentials. Please try again.')
+      }
     }
-    catch (error) {
-        console.error('Error:', error);
-        setError('Invalid credentials. Please try again.')
+    else
+    {
+      if (username === 'admin' && password === 'admin1234')
+      {
+        dispatch(SignInUser({userId: 0, username: 'admin', user: 'admin', gender: 'male'}));
+        navigate('/admin');
+      }
     }
-    // dispatch(SignInUser(formState));
-    // navigate(`/${formState.user}`);
-  };
+  }
 
   return (
     <div onSubmit={handleSubmit} className='p-3 max-w-lg mx-auto'>
