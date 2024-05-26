@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import PatientCard from '../../components/PatientCard';
-import PatientList from './PatientList';
 import Vitals from '../patient/Vitals';
 import TreatmentPlan from '../patient/TreatmentPlan';
 import { useSelector } from 'react-redux';

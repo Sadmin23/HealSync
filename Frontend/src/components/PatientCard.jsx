@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import PatientList from '../pages/doctor/PatientList';
 import patient1 from '../assets/patient1.jpg';
 import patient2 from '../assets/patient2.jpg';
 import patient3 from '../assets/patient3.jpg';
