@@ -74,8 +74,6 @@ export default function Layout() {
     try {
       window.open('http://localhost:3001/?roomID=123456', '_blank');
   
-      const updateData = { action: 'Emergency call responded' };
-  
       const response = await fetch(`http://127.0.0.1:8000/api/emergency/${emergencyId}`, {
         method: 'PUT',
         headers: {
@@ -87,7 +85,7 @@ export default function Layout() {
             "name": emergency.name,
             "patient_id": emergency.patient_id,
             "time": emergency.time,
-            "action": "Emergency Call Missed",
+            "action": "Emergency Call Responded",
             "gender": emergency.gender
           }
         ),
