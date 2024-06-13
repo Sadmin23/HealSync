@@ -22,7 +22,7 @@ export default function Emergencies() {
       }
     )
     .catch(error => console.error('Error fetching patient data:', error))}
-  , []);  
+  , []);
 
   return (
     <div className='h-screen p-8'>
