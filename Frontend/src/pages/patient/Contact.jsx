@@ -1,27 +1,64 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import phone from '../../assets/phone.png';
 import email from '../../assets/email.png';
 
 export default function Contact() {
 
+  const [emergencyDoctorId, setEmergencyDoctorId] = useState("");
+  const [emergencyDoctorGender, setEmergencyDoctorGender] = useState("");
   const user = useSelector((state) => state.user.currentUser);
   const name = user.username;
+  const patientID = user.userId;
+
+  useEffect(() => {
+    fetch(`http://127.0.0.1:8000/api/patientdoctor/patient/${patientID}`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to fetch nurse data');
+      }
+      return response.json();
+    })
+    .then(data => {
+      (data[0].type==="Emergency") ? setEmergencyDoctorId(data[0].doctor_id) : setEmergencyDoctorId(data[1].doctor_id);
+      }
+    )
+    .catch(error => console.error('Error fetching doctor data:', error));
+
+    fetch(`http://127.0.0.1:8000/api/doctor/${emergencyDoctorId}`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to fetch nurse data');
+      }
+      return response.json();
+    })
+    .then(data => {
+        setEmergencyDoctorGender(data.gender)
+      }
+    )
+    .catch(error => console.error('Error fetching patient data:', error));
+
+  }, []);
 
   const handleEmergencyCall = async () => {
     try {
       const currentTime = new Date().toLocaleTimeString();
 
-      const response = await fetch('http://localhost:8000/emergencies', {
+      const response = await fetch('http://127.0.0.1:8000/api/emergency/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-          name: name,
-          time: currentTime,
-          action: 'false'
-        })
+        body: JSON.stringify(
+          {
+            "doctor_id": emergencyDoctorId,
+            "name": name,
+            "patient_id": patientID,
+            "time": currentTime,
+            "action": "false",
+            "gender": emergencyDoctorGender
+          }
+        )
       });
 
       if (!response.ok) {
