@@ -40,6 +40,10 @@ export default function Sidebar() {
     navigate('/');
   }
 
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };  
+
   return (
     <div className='w-64 text-gray-700 border-r border-b rounded-br-md shadow-md bg-white border-gray-300 text-center h-screen'>
         <img 
@@ -47,8 +51,8 @@ export default function Sidebar() {
           alt='logo' 
           className='w-28 h-20 mx-auto mt-5'
         />
-        <p className='font-semibold mt-2 mb-1'>{user.username}</p>
-        <p>{user.user}</p>
+        <p className='font-semibold mt-2 mb-1'>{capitalizeFirstLetter(user.username)}</p>
+        <p>{capitalizeFirstLetter(user.user)}</p>
         <main className='my-10'>
             <ul className='px-4'>
               {navigationLinks.map((link, index) => (

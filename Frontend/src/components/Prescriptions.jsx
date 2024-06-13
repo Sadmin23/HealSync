@@ -4,6 +4,7 @@ import CommonLayout from './CommonLayout';
 import pill from '../assets/medicine.png';
 import syringe from '../assets/syringe.png';
 import syrup from '../assets/syrup.png';
+import nodata from '../assets/latest/nopresc.jpg';
 import { useSelector } from 'react-redux';
 
 export default function Prescriptions({update, patientId}) {
@@ -81,13 +82,17 @@ export default function Prescriptions({update, patientId}) {
   return (
     <CommonLayout title="PRESCRIBED MEDICATIONS">
         <div className="flex flex-col h-5/6 scroll-auto">
-        {medicines.map((medicine, index) => ( 
+        {/* {medicines.map((medicine, index) => ( 
             <div key={index} className='flex text-gray-600 mt-6'>
                 <img src={medicine.type === "tablet" ? pill : medicine.type === "injection" ? syringe : syrup} alt={medicine.name} className='w-6 h-6'/>
                 <h1 className='ml-4'>{medicine.name}</h1>
                 <h1 className='ml-auto'>{medicine.dose}</h1>
             </div>
-        ))  }
+        ))} */}
+        <div className='mx-auto'>
+          <img src={nodata} alt='No Data' className='w-80 h-64 mx-auto'/>
+          <h1 className='text-center text-gray-600 text-xl font-semibold'>No medicines prescribed</h1>
+        </div>
         </div>
         {update && <button onClick={()=>setShowForm(true)} className='bg-blue-500 hover:bg-blue-700 font-semibold text-white px-8 py-2 rounded-lg ml-20'>Add Medicine</button>}
         {showForm && (
