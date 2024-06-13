@@ -24,7 +24,9 @@ export default function Contact() {
       }
     )
     .catch(error => console.error('Error fetching doctor data:', error));
+  }, []);
 
+  useEffect(() => {
     fetch(`http://127.0.0.1:8000/api/doctor/${emergencyDoctorId}`)
     .then(response => {
       if (!response.ok) {
@@ -37,8 +39,11 @@ export default function Contact() {
       }
     )
     .catch(error => console.error('Error fetching patient data:', error));
+  }, [emergencyDoctorId]);
 
-  }, []);
+
+  console.log(emergencyDoctorId);
+  console.log(emergencyDoctorGender);
 
   const handleEmergencyCall = async () => {
     try {

@@ -18,78 +18,78 @@ export default function Layout() {
   const [showForm, setShowForm] = useState(false);
   const [caller, setCaller] = useState('');
 
-  // const calculateTimeDifference = (time1, time2) => {
-  //   const parsedTime1 = parseTimeString(time1);
-  //   const parsedTime2 = parseTimeString(time2);
+  const calculateTimeDifference = (time1, time2) => {
+    const parsedTime1 = parseTimeString(time1);
+    const parsedTime2 = parseTimeString(time2);
   
-  //   const totalSeconds1 = parsedTime1.hours * 3600 + parsedTime1.minutes * 60 + parsedTime1.seconds;
-  //   const totalSeconds2 = parsedTime2.hours * 3600 + parsedTime2.minutes * 60 + parsedTime2.seconds;
+    const totalSeconds1 = parsedTime1.hours * 3600 + parsedTime1.minutes * 60 + parsedTime1.seconds;
+    const totalSeconds2 = parsedTime2.hours * 3600 + parsedTime2.minutes * 60 + parsedTime2.seconds;
   
-  //   const differenceInSeconds = Math.abs(totalSeconds2 - totalSeconds1);
-  //   return differenceInSeconds;
-  // };
+    const differenceInSeconds = Math.abs(totalSeconds2 - totalSeconds1);
+    return differenceInSeconds;
+  };
   
-  // const parseTimeString = (timeString) => {
-  //   const [time, meridiem] = timeString.split(' ');
-  //   const [hours, minutes, seconds] = time.split(':').map(Number);
+  const parseTimeString = (timeString) => {
+    const [time, meridiem] = timeString.split(' ');
+    const [hours, minutes, seconds] = time.split(':').map(Number);
   
-  //   const parsedHours = meridiem === 'PM' ? hours + 12 : hours;
+    const parsedHours = meridiem === 'PM' ? hours + 12 : hours;
   
-  //   return {
-  //     hours: parsedHours,
-  //     minutes: minutes,
-  //     seconds: seconds
-  //   };
-  // };
+    return {
+      hours: parsedHours,
+      minutes: minutes,
+      seconds: seconds
+    };
+  };
 
-  // const fetchEmergencies = async () => {
-  //   const response = await fetch('http://localhost:8000/emergencies');
-  //   const data = await response.json();
-  //   setEmergencies(data);
-  //   if (data.length > 0 && userType === 'Doctor') {
-  //     let callTime = data[data.length - 1].time;
-  //     let currentTime = new Date().toLocaleTimeString();
-  //     const timeDifference = calculateTimeDifference(callTime, currentTime);
-  //     timeDifference < 30 && data[data.length-1].action === 'false' ? setShowForm(true) : setShowForm(false);
-  //   }
-  // };
+  const fetchEmergencies = async () => {
+    const response = await fetch('http://127.0.0.1:8000/api/emergency/');
+    const data = await response.json();
+    setEmergencies(data);
+    if (data.length > 0 && userType === 'doctor') {
+      let callTime = data[data.length - 1].time;
+      let currentTime = new Date().toLocaleTimeString();
+      const timeDifference = calculateTimeDifference(callTime, currentTime);
+      timeDifference < 30 && data[data.length-1].action === 'false' ? setShowForm(true) : setShowForm(false);
+    }
+  };
 
-  // useEffect(() => {
-  //   if (userType === 'Doctor')
-  //   {
-  //     const intervalId = setInterval(fetchEmergencies, 3000);
-  //     return () => clearInterval(intervalId);
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (userType === 'doctor')
+    {
+      const intervalId = setInterval(fetchEmergencies, 3000);
+      return () => clearInterval(intervalId);
+    }
+  }, []);
 
 
-  // useEffect(() => {
-  //   setCaller(emergencies[emergencies.length - 1]?.name);
-  // }, [emergencies])
+  useEffect(() => {
+    setCaller(emergencies[emergencies.length - 1]?.name);
+  }, [emergencies])
 
-  // const handleEmergencyCall = async () => {
-  //   try {
-  //     window.open('http://localhost:3001/?roomID=123456', '_blank');
+  const handleEmergencyCall = async () => {
+    try {
+      window.open('http://localhost:3001/?roomID=123456', '_blank');
   
-  //     const updateData = { action: 'Emergency call responded' };
+      const updateData = { action: 'Emergency call responded' };
   
-  //     const response = await fetch('http://localhost:8000/emergencies/', {
-  //       method: 'PUT',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify(updateData),
-  //     });
+      const response = await fetch('http://127.0.0.1:8000/api/emergency/', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updateData),
+      });
   
-  //     if (!response.ok) {
-  //       throw new Error('Failed to update emergency record');
-  //     }
+      if (!response.ok) {
+        throw new Error('Failed to update emergency record');
+      }
   
-  //     setShowForm(false);
-  //   } catch (error) {
-  //     console.error('Error updating emergency record:', error);
-  //   }
-  // };
+      setShowForm(false);
+    } catch (error) {
+      console.error('Error updating emergency record:', error);
+    }
+  };
 
   return (
     <div className='flex-col bg-slate-200'>
@@ -106,7 +106,7 @@ export default function Layout() {
               <h1 className='text-lg font-semibold text-gray-700 mb-4'>is making an emergency call</h1>
               <div className='bg-white'>
                 <div className="flex justify-center">
-                  <button className="bg-[#fc445c] flex items-center text-white text-xl tracking-wider font-bold pl-1 pr-6 rounded-md ">
+                  <button onClick={handleEmergencyCall} className="bg-[#fc445c] flex items-center text-white text-xl tracking-wider font-bold pl-1 pr-6 rounded-md ">
                     <img src={phone} alt='phone' className='h-16 w-16'/>
                     <span>Respond</span>
                   </button>
