@@ -60,7 +60,7 @@ export default function Contact() {
             "name": name,
             "patient_id": patientID,
             "time": currentTime,
-            "action": "false",
+            "action": "Emergency Call Missed",
             "gender": emergencyDoctorGender
           }
         )

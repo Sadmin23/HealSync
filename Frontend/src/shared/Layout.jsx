@@ -17,6 +17,8 @@ export default function Layout() {
   const [emergencies, setEmergencies] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [caller, setCaller] = useState('');
+  const [emergencyId, setEmergencyId] = useState('');
+  const [emergency, setEmergency] = useState('');
 
   const calculateTimeDifference = (time1, time2) => {
     const parsedTime1 = parseTimeString(time1);
@@ -50,7 +52,7 @@ export default function Layout() {
       let callTime = data[data.length - 1].time;
       let currentTime = new Date().toLocaleTimeString();
       const timeDifference = calculateTimeDifference(callTime, currentTime);
-      timeDifference < 30 && data[data.length-1].action === 'false' ? setShowForm(true) : setShowForm(false);
+      timeDifference < 30 && data[data.length-1].action === 'Emergency Call Missed' ? setShowForm(true) : setShowForm(false);
     }
   };
 
@@ -62,9 +64,10 @@ export default function Layout() {
     }
   }, []);
 
-
   useEffect(() => {
+    setEmergency(emergencies[emergencies.length-1])
     setCaller(emergencies[emergencies.length - 1]?.name);
+    setEmergencyId(emergencies[emergencies.length-1]?.id);
   }, [emergencies])
 
   const handleEmergencyCall = async () => {
@@ -73,12 +76,21 @@ export default function Layout() {
   
       const updateData = { action: 'Emergency call responded' };
   
-      const response = await fetch('http://127.0.0.1:8000/api/emergency/', {
+      const response = await fetch(`http://127.0.0.1:8000/api/emergency/${emergencyId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(updateData),
+        body: JSON.stringify(
+          {
+            "doctor_id": emergency.doctor_id,
+            "name": emergency.name,
+            "patient_id": emergency.patient_id,
+            "time": emergency.time,
+            "action": "Emergency Call Missed",
+            "gender": emergency.gender
+          }
+        ),
       });
   
       if (!response.ok) {
