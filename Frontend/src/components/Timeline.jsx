@@ -68,7 +68,7 @@ export default function Timeline() {
                 <div className="w-4/5 text-gray-600 text-right font-semibold">{timedate[1]}</div>
               </div>
               <div
-                className={`bg-slate-700 w-[3px] h-2/3 translate-x-8 translate-y-12 opacity-30`}
+                className={`bg-slate-700 w-[3px] h-5/6 translate-x-8 translate-y-12 opacity-30`}
               ></div>
               <img src={img_src} alt="logo" className="w-12 h-12 ml-2 rounded-full border-4 border-slate-400"/>
             </div>

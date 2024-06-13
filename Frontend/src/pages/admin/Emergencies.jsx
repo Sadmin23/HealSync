@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import AllEmergency from './AllEmergencies'
 import { useSelector } from 'react-redux';
 
 export default function Emergencies() {

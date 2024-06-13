@@ -90,7 +90,7 @@ export default function Prescriptions({update, patientId}) {
             </div>
         ))} */}
         <div className='mx-auto'>
-          <img src={nodata} alt='No Data' className='w-80 h-64 mx-auto'/>
+          <img src={nodata} alt='No Data' className={`w-80 mx-auto ${update ? 'h-56' : 'h-64'}`}/>
           <h1 className='text-center text-gray-600 text-xl font-semibold'>No medicines prescribed</h1>
         </div>
         </div>

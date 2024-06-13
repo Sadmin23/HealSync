@@ -58,7 +58,7 @@ export default function Reports({ update, patientId }) {
           </a>
         ))} */}
         <div className='mx-auto'>
-          <img src={nodata} alt='No Data' className='w-80 h-60 mx-auto mt-4'/>
+          <img src={nodata} alt='No Data' className={`w-80 mx-auto mt-4 ${update ? 'h-52' : 'h-60'}`}/>
           <h1 className='text-center text-gray-600 text-xl font-semibold'>No documents uploaded</h1>
         </div>
       </div>
