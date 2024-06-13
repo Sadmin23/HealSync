@@ -50,6 +50,7 @@ export default function Layout() {
     setEmergencies(data);
     if (data.length > 0 && userType === 'doctor') {
       let callTime = data[data.length - 1].time;
+      callTime = callTime.split('|')[1];
       let currentTime = new Date().toLocaleTimeString();
       const timeDifference = calculateTimeDifference(callTime, currentTime);
       timeDifference < 30 && data[data.length-1].action === 'Emergency Call Missed' ? setShowForm(true) : setShowForm(false);

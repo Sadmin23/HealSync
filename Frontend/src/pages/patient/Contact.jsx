@@ -41,13 +41,18 @@ export default function Contact() {
     .catch(error => console.error('Error fetching patient data:', error));
   }, [emergencyDoctorId]);
 
+  // const currentDate = new Date().toUTCString().split(' ').slice(0, 4).join(' ');
+  // console.log(currentDate);
 
-  console.log(emergencyDoctorId);
-  console.log(emergencyDoctorGender);
 
   const handleEmergencyCall = async () => {
     try {
+      const currentDate = new Date().toUTCString().split(' ').slice(0, 4).join(' ');
       const currentTime = new Date().toLocaleTimeString();
+    
+      const Date_Time = currentDate + '|' + currentTime;
+    
+      console.log(Date_Time);
 
       const response = await fetch('http://127.0.0.1:8000/api/emergency/', {
         method: 'POST',
@@ -59,7 +64,7 @@ export default function Contact() {
             "doctor_id": emergencyDoctorId,
             "name": name,
             "patient_id": patientID,
-            "time": currentTime,
+            "time": Date_Time,
             "action": "Emergency Call Missed",
             "gender": emergencyDoctorGender
           }
