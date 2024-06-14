@@ -155,7 +155,7 @@ export default function NurseForm() {
         </div>
       </div>                    
       <button 
-          className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80'
+          className='bg-slate-700 font-bold tracking-wider text-xl text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80'
           onClick={handleSubmit}
       >
           Register
