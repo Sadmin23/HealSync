@@ -1,6 +1,7 @@
 import React from 'react'
 import doctor from '../assets/doctor.jpg'
 import doctor3 from '../assets/doctor3.jpg'
+import doctor4 from '../assets/doctor4.jpg'
 import nurse from '../assets/nurse.jpg'
 import nurse2 from '../assets/nurse2.jpg'
 
@@ -21,7 +22,7 @@ export default function CareMember({name, designation, type}) {
         icon = nurse2
           break;
       default:
-        icon = doctor3
+        icon = name==='Lubna Lamia' ? doctor4 : doctor3
     
   }
 

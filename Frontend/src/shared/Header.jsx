@@ -8,7 +8,7 @@ export default function Header() {
         <div className="flex items-center bg-white px-16 h-16 shadow-sm border-b border-gray-300">
           <img src={logo} alt='logo' className='w-12 h-12 mr-3 object-cover'/>
           <Link to='/'>
-            <h1 className='block items-center text-3xl font-bold'>HealSync</h1>
+            <h1 className='block items-center text-2xl font-bold'>HealSync</h1>
           </Link>
         </div>
     </div>

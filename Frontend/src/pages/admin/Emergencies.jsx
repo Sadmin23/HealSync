@@ -44,7 +44,7 @@ export default function Emergencies() {
         )) :
         <div className="flex flex-col items-center justify-center bg-white rounded-b-md">
         <img src={error} alt="error" className="w-96 h-80" />
-        <h1 className="text-2xl font-bold text-red-900 pb-12">No emergencies found!</h1>
+        <h1 className="text-2xl font-bold text-red-900 pb-12">No emergencies calls made!</h1>
       </div>        
       }       
       </body>

@@ -11,6 +11,7 @@ import avatar2 from '../assets/avatar2.png';
 export default function Sidebar() {
 
   const user = useSelector((state) => state.user.currentUser);
+  const gender = user.gender;
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -47,12 +48,12 @@ export default function Sidebar() {
   return (
     <div className='w-64 text-gray-700 border-r border-b rounded-br-md shadow-md bg-white border-gray-300 text-center h-screen'>
         <img 
-          src={avatar1} 
+          src={gender === 'male' ? avatar1 : avatar2} 
           alt='logo' 
           className='w-28 h-20 mx-auto mt-5'
         />
-        <p className='font-semibold mt-2 mb-1'>{capitalizeFirstLetter(user.username)}</p>
-        <p>{capitalizeFirstLetter(user.user)}</p>
+        <p className='font-bold text-xl mt-2 mb-1'>{capitalizeFirstLetter(user.username)}</p>
+        <p className='font-semibold text-slate-500'>{capitalizeFirstLetter(user.user)}</p>
         <main className='my-10'>
             <ul className='px-4'>
               {navigationLinks.map((link, index) => (
