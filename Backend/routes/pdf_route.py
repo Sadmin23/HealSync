@@ -36,5 +36,5 @@ async def list_pdf_files(username: str):
     pdf_files = []
     for file_name in os.listdir(user_folder):
         if file_name.endswith(".pdf"):
-            pdf_files.routerend({"filename": file_name})
+            pdf_files.append({"filename": file_name})
     return pdf_files

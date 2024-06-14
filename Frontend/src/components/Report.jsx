@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import CommonLayout from './CommonLayout';
 import PdfUpload from './PdfUpload';
-import nodata from '../assets/latest/nodocs.jpg';
+import nodata from '../assets/nodocs.jpg';
+import pdf from '../assets/pdf.svg'
 import { useSelector } from 'react-redux';
 
 export default function Reports({ update, patientId }) {
@@ -45,22 +46,25 @@ export default function Reports({ update, patientId }) {
   return (
     <CommonLayout title="IMPORTANT DOCUMENTS">
       <div className='flex flex-col h-5/6'>
-        {/* {pdfList.map((document, index) => (
-          <a
-            key={index}
-            href={`http://localhost:8000/pdf/${patientId}/${document.filename}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className='flex border-2 border-dotted border-gray-400 rounded-md text-gray-500 p-2 mt-4 w-full hover:bg-slate-100'
-          >
-            <img src={pdf} alt="pdf" className='w-6 h-6 ml-1'/>
-            <h1 className='ml-6 font-semibold'>{document.filename.replace('.pdf', '')}</h1>
-          </a>
-        ))} */}
-        <div className='mx-auto'>
-          <img src={nodata} alt='No Data' className={`w-80 mx-auto mt-4 ${update ? 'h-52' : 'h-60'}`}/>
-          <h1 className='text-center text-gray-600 text-xl font-semibold'>No documents uploaded</h1>
-        </div>
+        {
+          pdfList.length > 0 ?
+          pdfList.map((document, index) => (
+            <a
+              key={index}
+              href={`http://localhost:8000/pdf/${patientId}/${document.filename}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className='flex border-2 border-dotted border-gray-400 rounded-md text-gray-500 p-2 mt-4 w-full hover:bg-slate-100'
+            >
+              <img src={pdf} alt="pdf" className='w-6 h-6 ml-1'/>
+              <h1 className='ml-6 font-semibold'>{document.filename.replace('.pdf', '')}</h1>
+            </a>
+          )) : 
+          <div className='mx-auto'>
+            <img src={nodata} alt='No Data' className={`w-80 mx-auto mt-4 ${update ? 'h-52' : 'h-60'}`}/>
+            <h1 className='text-center text-gray-600 text-xl font-semibold'>No documents uploaded</h1>
+          </div>
+        }
       </div>
       {update && (
         <>

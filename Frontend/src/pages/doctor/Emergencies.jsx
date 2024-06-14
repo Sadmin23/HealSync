@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import error from '../../assets/latest/error.jpg'
+import error from '../../assets/error.jpg'
 
 export default function Emergencies() {
 

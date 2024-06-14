@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import error from '../../assets/latest/error.jpg'
+import error from '../../assets/error.jpg'
 
 export default function Emergencies() {
 
