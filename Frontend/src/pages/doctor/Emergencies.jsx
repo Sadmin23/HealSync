@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import error from '../../assets/latest/error.jpg'
 
 export default function Emergencies() {
 
@@ -35,7 +36,7 @@ export default function Emergencies() {
         <div className="pl-6 py-2 w-72">Response</div>
       </header>
       <body>
-        {
+        { emergencyList.length !== 0 ?
           emergencyList.map((emergency, index) => (
             <div key={index} className={`flex font-semibold border-x border-green-950 ${index % 2 === 0 ? 'bg-green-50' : 'bg-green-200'} ${index === (emergencyList.length - 1) ?  `border-b rounded-b` : ``}`}>
               <div className="pl-6 py-2 w-72">{emergency.id}</div>
@@ -44,7 +45,11 @@ export default function Emergencies() {
               <div className="pl-6 py-2 w-40">{emergency.time.split('|')[1]}</div>
               <div className="pl-6 py-2 w-72">{emergency.action}</div>
             </div>
-          ))
+          )) :
+          <div className="flex flex-col items-center justify-center bg-white rounded-b-md">
+            <img src={error} alt="error" className="w-96 h-80" />
+            <h1 className="text-2xl font-bold text-red-900 pb-12">No emergencies found!</h1>
+          </div>
         }       
       </body>
     </div>

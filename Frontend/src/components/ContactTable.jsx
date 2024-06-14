@@ -51,14 +51,15 @@ export default function ContactTable() {
       }
     )
     .catch(error => console.error('Error fetching nurse data:', error));
-
-    // setContacts([...patientData, ...doctorData, ...nurseData])
-
   }, []);
 
   useEffect(() => {
     setContacts([...patientData, ...doctorData, ...nurseData].filter(contact => contact.id !== userId))
   }, [patientData, doctorData, nurseData])
+
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };  
 
   return (
     <div className='h-screen p-8'>
@@ -75,7 +76,7 @@ export default function ContactTable() {
         contacts.map((contact, index) => (
           <div key={index} className={`flex font-semibold border-x border-green-950 ${index % 2 === 0 ? 'bg-green-50' : 'bg-green-200'} ${index === (contacts.length - 1) ?  `border-b rounded-b` : ``}`}>
             <div className="pl-6 py-2 w-60">{contact.name}</div>
-            <div className="pl-6 py-2 w-52">{contact.role}</div>
+            <div className="pl-6 py-2 w-52">{capitalizeFirstLetter(contact.role)}</div>
             <div className="pl-6 py-2 w-60">{contact.email}</div>
             <div className="pl-6 py-2 w-60">{contact.phone}</div>
             <div className='flex items-center ml-6'>
