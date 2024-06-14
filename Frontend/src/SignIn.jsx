@@ -2,7 +2,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux'
 import { SignInUser } from './redux/userSlice'
 import { useEffect, useState } from 'react';
-import main from './assets/main.png'
+import main from './assets/side.png'
+import logo from './assets/logo.png';
 
 export default function SignIn() {
 
@@ -95,10 +96,11 @@ export default function SignIn() {
     <div className='flex'>
       <div className='w-1/2 bg-slate-200 h-screen'>
         <h1 className='mt-20 text-center text-5xl font-mono font-bold'>Welcome to HealSync</h1>
-        <img src={main} alt='main' className='mx-auto mt-10 w-[550px] h-96 object-cover'/>
+        <img src={main} alt='main' className='mx-auto mt-10 w-7/12 object-cover'/>
       </div>
-      <div onSubmit={handleSubmit} className='p-3 mt-20 w-2/5 mx-auto'>
-        <h1 className='text-4xl tracking-wide text-center font-bold my-7'>Sign In</h1>
+      <div onSubmit={handleSubmit} className='p-3 mt-10 w-2/5 mx-auto'>
+        <img src={logo} alt='logo' className='mx-auto w-32 h-32 object-cover mb-2'/>
+        <h1 className='text-center text-3xl font-bold tracking-wide mb-6'>HealSync</h1>
         <form className='flex flex-col gap-4'>
           <select
               className='border p-3 rounded-lg'
@@ -134,7 +136,7 @@ export default function SignIn() {
             onChange={handleChange}
             required
           />
-          <button type='submit' className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80'
+          <button type='submit' className='bg-slate-700 font-bold tracking-wider text-xl text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80'
           >
             Sign In
           </button>
