@@ -69,6 +69,7 @@ _Below is an example of how you can instruct your audience on installing and set
 
 1. Get a free API Key at [https://example.com](https://example.com)
 2. Clone the repo
+
    ```sh
    git clone https://github.com/your_username_/Project-Name.git
    ```
@@ -88,16 +89,8 @@ _Below is an example of how you can instruct your audience on installing and set
 
 ## Database Schema
 
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+![schema](https://github.com/Sadmin23/HealSync/assets/86393032/65d94f3f-4866-4bf6-94d7-78ba91e5bd30)
 
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -105,9 +98,7 @@ Don't forget to give the project a star! Thanks again!
 <!-- CONTACT -->
 ## API Routes
 
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
-
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+![api](https://github.com/Sadmin23/HealSync/assets/86393032/c7a7b5a7-4a0d-4e40-8ace-ac30520db4b1)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
