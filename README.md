@@ -24,7 +24,7 @@
 ### About HealSync
 
 #### Patient Features:
-- **Vitals Monitoring**: Track and display vital signs (e.g., heart rate, blood pressure) with a graphical representation over time.
+- **Vitals Monitoring**: Track and display vital signs (e.g., heart rate, blood pressure,breathing rate,temparature) with a graphical representation over time.
 - **Prescription Management**: View and manage prescribed medications.
 - **Reports Access**: Access medical reports and diagnostic results.
 - **Treatment Plan**: Overview of the current treatment plan, including steps and objectives.
