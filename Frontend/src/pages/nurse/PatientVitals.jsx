@@ -40,7 +40,7 @@ export default function Patients() {
           <h1 className="text-lg font-bold text-green-900 mx-2">PATIENTS</h1>
           <div className='mt-6 flex space-x-5'>
             {patientData.map((patient, index) => (
-              <PatientCard key={index} currentPatientID={patient.patient_id} role="nurse" setPatientId={setPatientId} setVitals={setVitals} />
+              <PatientCard key={index} index={index} currentPatientID={patient.patient_id} role="nurse" setPatientId={setPatientId} setVitals={setVitals} />
             ))}
           </div>
         </div>

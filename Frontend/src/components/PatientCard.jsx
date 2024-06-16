@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import patient1 from '../assets/patient1.jpg';
 import patient2 from '../assets/patient2.jpg';
-import patient3 from '../assets/patient3.jpg';
-import patient4 from '../assets/patient4.jpg';
+import patient5 from '../assets/patient5.jpg';
 
-export default function PatientCard({currentPatientID, role, setPatientId, setVitals, setTreatment}) {
+export default function PatientCard({index, currentPatientID, role, setPatientId, setVitals, setTreatment}) {
     
   const handleVitals = () => {
     setPatientId(currPatient.id);
@@ -34,12 +33,12 @@ export default function PatientCard({currentPatientID, role, setPatientId, setVi
   }, []);
 
 
-  console.log(currPatient);
+  const patientImage = (index === 0) ? patient1 : (index === 1) ? patient2 : patient5;
 
   return (
     <div className='bg-white w-96 border border-gray-300 shadow-md rounded-lg p-6'>
         <div className='flex items-center border-b-2 pb-4'>
-          <img src={patient1} alt='nurse' className='h-16 w-16 rounded-full' />
+          <img src={patientImage} alt='nurse' className='h-16 w-16 rounded-full' />
           <div className='ml-8 font-semibold space-y-2'>
             <h1 className='text-green-600'>{currPatient.name}</h1>
             <h1 className='text-gray-600'>Patient Username: {currPatient.username}</h1>
