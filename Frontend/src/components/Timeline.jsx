@@ -1,5 +1,6 @@
 import nurse from '../assets/nurse.jpg'
 import doctor from '../assets/doctor.jpg'
+import doctor3 from '../assets/doctor3.jpg'
 import doctor4 from '../assets/doctor4.jpg'
 import patient1  from '../assets/patient1.jpg'
 import patient3  from '../assets/patient2.jpg'
@@ -53,6 +54,9 @@ export default function Timeline() {
             break;
           case "Patient Registration":
             img_src = pic;
+            break;
+          case "Emergency Call":
+            img_src = doctor3;
             break;
           default:
             return pic;

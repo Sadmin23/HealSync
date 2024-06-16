@@ -13,6 +13,7 @@ export default function Layout() {
 
   const user = useSelector((state) => state.user.currentUser);
   const userType = user.user;
+  const username = user.username;
 
   const [emergencies, setEmergencies] = useState([]);
   const [showForm, setShowForm] = useState(false);
@@ -90,6 +91,23 @@ export default function Layout() {
             "gender": emergency.gender
           }
         ),
+      });
+
+      const currentDate = new Date();
+      const formattedDate = currentDate.toLocaleDateString('en-GB');
+      const formattedTime = currentDate.toLocaleTimeString('en-US', { hour12: false }); // Format time as 'HH:MM'
+  
+      await fetch('http://127.0.0.1:8000/api/timeline', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          "title": 'Emergency Call',
+          "patient_id": emergency.patient_id,
+          "time": formattedDate + ' ' + formattedTime,
+          "description": `Your made an emergency call to your emergency doctor ${username} that was responded`,
+        }),
       });
   
       if (!response.ok) {
