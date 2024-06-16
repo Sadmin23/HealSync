@@ -24,17 +24,17 @@
 ### About HealSync
 
 #### Patient Features:
-- **Vitals Monitoring**: Track and display vital signs (e.g., heart rate, blood pressure,breathing rate,temparature) with a graphical representation over time.
+- **Vitals Monitoring**: Track and display vital signs (e.g., heart rate, blood pressure, breathing rate, temperature) with a graphical representation over time.
 - **Prescription Management**: View and manage prescribed medications.
 - **Reports Access**: Access medical reports and diagnostic results.
-- **Treatment Plan**: Overview of the current treatment plan, including steps and objectives.
-- **Treatment History**: Detailed history of past treatments and interventions.
+- **Treatment Plan**: An overview of the current treatment plan, including steps and objectives.
+- **Treatment History**: A detailed history of past treatments and interventions.
 - **Emergency Contact System**:
-  - **Video Call,Voice Call,Chat**: Direct communication with emergency doctors.
-  - **Email**: Alternative method for contacting medical professionals in emergencies.
+  - **Video Call, Voice Call, and Chat: Direct communication with emergency doctors.
+  - **Email**: An alternative method for contacting medical professionals in emergencies.
 
 #### Doctor Interface:
-- **Patient Data Monitoring**: Access and review patient vitals, reports, and treatment history.
+- **Patient Data Monitoring**: Access and review patient vitals, reports, and treatment histories.
 - **Treatment Planning**: Prescribe medications, plan treatment steps, and add new reports.
 - **Collaboration Tools**: Communicate and collaborate with other doctors and nurses.
 
@@ -47,7 +47,7 @@
 
 #### Key Benefits:
 - **Integrated Care**: Facilitates seamless interaction and data sharing between patients, doctors, and nurses.
-- **Real-Time Monitoring**: Ensures up-to-date patient information is always accessible.
+- **Real-Time Monitoring**: This ensures up-to-date patient information is always accessible.
 - **Emergency Readiness**: Quick and easy access to emergency care through multiple communication channels.
 - **Comprehensive Treatment Management**: Provides a holistic view of patient care from admission to discharge.
 
@@ -148,6 +148,8 @@ This app aims to enhance the efficiency and quality of in-patient care by levera
 ![vitals](https://github.com/Sadmin23/HealSync/assets/86393032/069fd1a4-a1be-4a41-b7d6-36458ad9626c)
 ### Patient Treatment Plan
 ![treatment_plan](https://github.com/Sadmin23/HealSync/assets/86393032/8938383e-765b-4c12-a7cd-1d3146df7b34)
+### Patient Medical Timeline
+![timeline](https://github.com/Sadmin23/HealSync/assets/86393032/ebdafb92-6c53-4377-875e-4b0f33c47e3b)
 ### Dashboard
 ![dashboard](https://github.com/Sadmin23/HealSync/assets/86393032/614a9d81-4321-49f5-8888-dfd99967f5e7)
 ### Patient List
