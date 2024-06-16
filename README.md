@@ -1,22 +1,13 @@
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
-
-
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
+  <a href="https://github.com/Sadmin23/HealSync">
     <img src="images/logo.png" alt="Logo" width="120" height="120">
   </a>
 
   <h1 align="center">HealSync</h1>
   <p align="center">
-    <a href="https://github.com/">View Demo</a>
+    <a href="https://www.youtube.com/watch?v=B4huNREGaVU">View Demo</a>
     ·
     <a href="https://github.com/issues">Report Bug</a>
     ·
@@ -29,35 +20,53 @@
 
 
 <!-- ABOUT THE PROJECT -->
-## About The Project
 
-There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
+### About HealSync
 
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should implement DRY principles to the rest of your life :smile:
+#### Patient Features:
+- **Vitals Monitoring**: Track and display vital signs (e.g., heart rate, blood pressure,breathing rate,temparature) with a graphical representation over time.
+- **Prescription Management**: View and manage prescribed medications.
+- **Reports Access**: Access medical reports and diagnostic results.
+- **Treatment Plan**: Overview of the current treatment plan, including steps and objectives.
+- **Treatment History**: Detailed history of past treatments and interventions.
+- **Emergency Contact System**:
+  - **Video Call,Voice Call,Chat**: Direct communication with emergency doctors.
+  - **Email**: Alternative method for contacting medical professionals in emergencies.
 
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this template!
+#### Doctor Interface:
+- **Patient Data Monitoring**: Access and review patient vitals, reports, and treatment history.
+- **Treatment Planning**: Prescribe medications, plan treatment steps, and add new reports.
+- **Collaboration Tools**: Communicate and collaborate with other doctors and nurses.
 
-Use the `BLANK_README.md` to get started.
+#### Nurse Interface:
+- **Patient Data Monitoring**: View and track patient vitals and data.
+- **Vitals Update**: Regularly update patient vitals and monitor changes.
 
+#### Admin Interface:
+- **System Oversight**: Monitor and manage overall system data and ensure smooth operation.
+
+#### Key Benefits:
+- **Integrated Care**: Facilitates seamless interaction and data sharing between patients, doctors, and nurses.
+- **Real-Time Monitoring**: Ensures up-to-date patient information is always accessible.
+- **Emergency Readiness**: Quick and easy access to emergency care through multiple communication channels.
+- **Comprehensive Treatment Management**: Provides a holistic view of patient care from admission to discharge.
+
+This app aims to enhance the efficiency and quality of in-patient care by leveraging technology for better monitoring, communication, and treatment planning.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
 ## Built With
 
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-
-* [![Next][Next.js]][Next-url]
-* [![React][React.js]][React-url]
-* [![Vue][Vue.js]][Vue-url]
-* [![Angular][Angular.io]][Angular-url]
-* [![Svelte][Svelte.dev]][Svelte-url]
-* [![Laravel][Laravel.com]][Laravel-url]
-* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-* [![JQuery][JQuery.com]][JQuery-url]
+* ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+* ![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)
+* ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
+* ![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white)
+* ![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
+* ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
+* ![Chart.js](https://img.shields.io/badge/chart.js-F5788D.svg?style=for-the-badge&logo=chart.js&logoColor=white)
+* ![Axios](https://img.shields.io/badge/axios-671ddf?&style=for-the-badge&logo=axios&logoColor=white)
+* [![ZEGOCLOUD](https://img.shields.io/badge/ZEGOCLOUD-blue?style=for-the-badge&logo=https://www.zegocloud.com/img/share.png&link=https://www.zegocloud.com/)](https://www.zegocloud.com/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
