@@ -30,7 +30,7 @@
 - **Treatment Plan**: An overview of the current treatment plan, including steps and objectives.
 - **Treatment History**: A detailed history of past treatments and interventions.
 - **Emergency Contact System**:
-  - **Video Call, Voice Call, and Chat: Direct communication with emergency doctors.
+  - **Video Call, Voice Call, and Chat**: Direct communication with emergency doctors.
   - **Email**: An alternative method for contacting medical professionals in emergencies.
 
 #### Doctor Interface:
@@ -51,7 +51,7 @@
 - **Emergency Readiness**: Quick and easy access to emergency care through multiple communication channels.
 - **Comprehensive Treatment Management**: Provides a holistic view of patient care from admission to discharge.
 
-This app aims to enhance the efficiency and quality of in-patient care by leveraging technology for better monitoring, communication, and treatment planning.
+This app aims to enhance the efficiency and quality of inpatient care by leveraging technology for better monitoring, communication, and treatment planning.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
