@@ -153,7 +153,7 @@ This app aims to enhance the efficiency and quality of inpatient care by leverag
 ### Dashboard
 ![dashboard](https://github.com/Sadmin23/HealSync/assets/86393032/614a9d81-4321-49f5-8888-dfd99967f5e7)
 ### Patient List
-![patients](https://github.com/Sadmin23/HealSync/assets/86393032/990ce4c0-7424-4086-901d-5ee528295f51)
+![patients](https://github.com/Sadmin23/HealSync/assets/86393032/1f5142b8-ce1c-4db8-b7ac-a4fb0664d418)
 ### Emergency Call between Patient and Doctor
 ![emergency](https://github.com/Sadmin23/HealSync/assets/86393032/b6b77da7-6947-4008-88f0-a8337a873c56)
 ![emergency_call](https://github.com/Sadmin23/HealSync/assets/86393032/44390c31-b5fe-4746-bba2-e0b5df1bfe27)
