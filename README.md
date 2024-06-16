@@ -11,7 +11,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="images/logo.png" alt="Logo" width="120" height="120">
   </a>
 
   <h1 align="center">HealSync</h1>
@@ -65,21 +65,46 @@ This section should list any major frameworks/libraries used to bootstrap your p
 
 ## Installation
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
-
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone the repo
 
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone https://github.com/Sadmin23/HealSync.git
+   ```
+2. Go to Frontend
+   ```sh
+   cd Frontend
    ```
 3. Install NPM packages
    ```sh
    npm install
    ```
-4. Enter your API in `config.js`
+4. Go to Calling App
+   ```sh
+   cd ..
+   cd Calling App
+   ```
+5. Create a `.env` file
+6. Enter your ZEGOCLOUD app Id and server secret key
    ```js
-   const API_KEY = 'ENTER YOUR API';
+   REACT_APP_ZEGO_APP_ID='YOUR APP ID'
+   REACT_APP_ZEGO_SERVER_SECRET='YOUR SERVER SECRET KEY'
+   ```
+7. Install NPM packages
+   ```sh
+   npm install
+   ```
+8. Go to Backend
+   ```sh
+   cd ..
+   cd Backend
+   ```
+9. Create a .env file and enter your Mongodb url
+   ```py
+    DATABASE_URL='YOUR MONGODB URL'
+   ```
+10. Intsall python packages
+   ```py
+    pip install -r requirements.txt
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -106,17 +131,24 @@ _Below is an example of how you can instruct your audience on installing and set
 
 <!-- ACKNOWLEDGMENTS -->
 ## Screenshots
+### Registration page
+![register](https://github.com/Sadmin23/HealSync/assets/86393032/456d0e87-482b-4fe1-894c-f537fde52ffe)
+### Sign In page
+![signin](https://github.com/Sadmin23/HealSync/assets/86393032/2e48b59d-5055-4679-bda2-00b3ca6eec9b)
+### Patient Vitals
+![vitals](https://github.com/Sadmin23/HealSync/assets/86393032/069fd1a4-a1be-4a41-b7d6-36458ad9626c)
+### Patient Treatment Plan
+![treatment_plan](https://github.com/Sadmin23/HealSync/assets/86393032/8938383e-765b-4c12-a7cd-1d3146df7b34)
+### Dashboard
+![dashboard](https://github.com/Sadmin23/HealSync/assets/86393032/614a9d81-4321-49f5-8888-dfd99967f5e7)
+### Patient List
+![patients](https://github.com/Sadmin23/HealSync/assets/86393032/990ce4c0-7424-4086-901d-5ee528295f51)
+### Emergency call between patient and doctor
+![emergency](https://github.com/Sadmin23/HealSync/assets/86393032/b6b77da7-6947-4008-88f0-a8337a873c56)
+![emergency_call](https://github.com/Sadmin23/HealSync/assets/86393032/44390c31-b5fe-4746-bba2-e0b5df1bfe27)
+![emergency_call2](https://github.com/Sadmin23/HealSync/assets/86393032/bf6814bf-cf71-43b4-a917-368beed79239)
 
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
 
-* [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-* [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
-* [Malven's Grid Cheatsheet](https://grid.malven.co/)
-* [Img Shields](https://shields.io)
-* [GitHub Pages](https://pages.github.com)
-* [Font Awesome](https://fontawesome.com)
-* [React Icons](https://react-icons.github.io/react-icons/search)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
