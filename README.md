@@ -20,19 +20,38 @@
 
 
 <!-- ABOUT THE PROJECT -->
-## About The Project
 
-There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
+### About HealSync
 
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should implement DRY principles to the rest of your life :smile:
+#### Patient Features:
+- **Vitals Monitoring**: Track and display vital signs (e.g., heart rate, blood pressure) with a graphical representation over time.
+- **Prescription Management**: View and manage prescribed medications.
+- **Reports Access**: Access medical reports and diagnostic results.
+- **Treatment Plan**: Overview of the current treatment plan, including steps and objectives.
+- **Treatment History**: Detailed history of past treatments and interventions.
+- **Emergency Contact System**:
+  - **Video Call,Voice Call,Chat**: Direct communication with emergency doctors.
+  - **Email**: Alternative method for contacting medical professionals in emergencies.
 
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this template!
+#### Doctor Interface:
+- **Patient Data Monitoring**: Access and review patient vitals, reports, and treatment history.
+- **Treatment Planning**: Prescribe medications, plan treatment steps, and add new reports.
+- **Collaboration Tools**: Communicate and collaborate with other doctors and nurses.
 
-Use the `BLANK_README.md` to get started.
+#### Nurse Interface:
+- **Patient Data Monitoring**: View and track patient vitals and data.
+- **Vitals Update**: Regularly update patient vitals and monitor changes.
 
+#### Admin Interface:
+- **System Oversight**: Monitor and manage overall system data and ensure smooth operation.
+
+#### Key Benefits:
+- **Integrated Care**: Facilitates seamless interaction and data sharing between patients, doctors, and nurses.
+- **Real-Time Monitoring**: Ensures up-to-date patient information is always accessible.
+- **Emergency Readiness**: Quick and easy access to emergency care through multiple communication channels.
+- **Comprehensive Treatment Management**: Provides a holistic view of patient care from admission to discharge.
+
+This app aims to enhance the efficiency and quality of in-patient care by leveraging technology for better monitoring, communication, and treatment planning.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
